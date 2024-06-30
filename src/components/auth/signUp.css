@@ -43,6 +43,10 @@
       color:#fff;
     }
 
+    ::-webkit-input-placeholder {
+      color:    #fff;
+  }
+
     .icon{
       font-size: 2rem;
       color: #05378e;

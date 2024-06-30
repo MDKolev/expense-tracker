@@ -34,6 +34,7 @@ const AuthPage = () => {
           </div>
         )}
       </div>
+      <div className="separator"></div>
       <div className="sign-up-container">
         {showSignUp && <SignUp />}
         {showLeft && (

@@ -1,5 +1,4 @@
 .container {
-  backdrop-filter: blur(4px);
   min-width: 60vw;
   height: 60vh;
   display: flex;
@@ -8,6 +7,8 @@
   border-radius: 4rem;
   border: 1px solid #ffffff1d;
   position: relative;
+  backdrop-filter: saturate(20%);
+
 
  .sign-in-container, .sign-up-container {
   display: flex;
@@ -55,5 +56,7 @@
   border-radius: 4rem 0 0 4rem;
  }  
 
-
+ 
 }
+
+

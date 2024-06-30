@@ -37,8 +37,12 @@
       outline: none;
       border-bottom: 1px solid white;
       color:#fff;
-    }
 
+    
+    }
+    ::-webkit-input-placeholder {
+      color:    #fff;
+  }
 
     .icon{
       font-size: 2rem;
