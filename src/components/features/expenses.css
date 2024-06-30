@@ -17,6 +17,7 @@
     padding: 0 1rem;
     border-radius: 0.5rem;
     border-bottom: 2px solid green;
+    box-shadow: 10px 5px 5px rgba(7, 173, 29, 0.6); 
     transition: 0.3s ease;
   }
   
@@ -24,6 +25,7 @@
     color: #fff;
     background-color: green;
     background-color: rgb(1, 183, 1);
+    box-shadow: none;
   }
 
   .filter-btn{
@@ -33,6 +35,7 @@
     padding: 0 0.2rem;
     border-radius: 0.5rem;
     border-bottom: 2px solid #05378e;
+    box-shadow: 10px 3px 5px rgba(10, 13, 169, 0.6); 
     margin-left: 1rem;
     transition: 0.3s ease;
   }
@@ -40,6 +43,7 @@
   .filter-btn:hover{
     color: #fff;
     background-color: #0744ad;
+    box-shadow: none;
   }
 }
 
