@@ -25,7 +25,7 @@
   flex: 1;
  }
 
-  .email-wrapper, .password-wrapper, .username-wrapper{
+  .email-wrapper, .password-wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,3 +92,7 @@
 
 }
 
+.error {
+  font-size: 1rem;
+  color: rgb(253, 20, 20);
+}

@@ -5,8 +5,8 @@ import Home from "./components/main/Home";
 function App() {
   return (
     <>
-      {/* <AuthPage /> */}
-      <Home/>
+      <AuthPage />
+      {/* <Home/> */}
     </>
   );
 }

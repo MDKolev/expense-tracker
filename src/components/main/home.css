@@ -1,5 +1,5 @@
 .home-container {
-  backdrop-filter: saturate(1%) blur(4px);
+  backdrop-filter: saturate(1%) blur(2px);
   border: 1px solid #fff;
   border-radius: 4rem;
   width: 80vw;
