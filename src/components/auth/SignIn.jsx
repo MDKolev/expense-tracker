@@ -4,19 +4,37 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { auth } from "../../firebase-config/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userCredentials, setUserCredentials] = useState({});
+  const [error, setError] = useState("");
 
-  const signIn = async() => {
-    try{
-      await createUserWithEmailAndPassword(auth, email, password)
-    } catch(err) {
-      console.error(err);
+  const handleCredentials = (e) => {
+    setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
+    console.log(userCredentials);
+  };
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      await signInWithEmailAndPassword(
+        auth,
+        userCredentials.email,
+        userCredentials.password
+      );
+    } catch (err) {
+      setError(err.message);
     }
   };
+
+  const handlePasswordReset = () => {
+    const email = prompt("Please enter your email");
+    sendPasswordResetEmail(auth, email);
+    alert('Email sent! Check your inbox for password reset instructions.')
+  }
 
   return (
     <div className="login-container">
@@ -27,7 +45,10 @@ const SignIn = () => {
           <input
             type="email"
             placeholder="Email..."
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            onChange={(e) => {
+              handleCredentials(e);
+            }}
           />
         </div>
         <div className="password-wrapper">
@@ -35,13 +56,16 @@ const SignIn = () => {
           <input
             type="password"
             placeholder="Password..."
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            onChange={(e) => {
+              handleCredentials(e);
+            }}
           />
         </div>
-        <p className="forgot-password">Forgot password?</p>
-        <div></div>
+        <p className="forgot-password" onClick={handlePasswordReset}>Forgot password?</p>
+        {error && <div className="error">{error}</div>}
       </form>
-      <button className="sign-in-button" onClick={signIn}>
+      <button className="sign-in-button" onClick={(e) => handleSignIn(e)}>
         Sign In
       </button>
       <p>

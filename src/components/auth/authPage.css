@@ -46,7 +46,11 @@
   left: 50%;
   border-radius: 0 4rem 4rem 0;
   background: linear-gradient(to left, #032385d3, #032485c6,#032485ac, #03248584, transparent 100%);
- }
+  -webkit-transition: opacity 1s linear;
+  -moz-transition: opacity 1s linear;
+  -o-transition: opacity 1s linear;
+  transition: opacity 1s linear;
+}
 
 .left {
   background: linear-gradient(to right, #032385d3, #032485c6,#032485ac, #03248584, transparent 100%);
@@ -54,8 +58,15 @@
   top: 0;
   right: 50%;
   border-radius: 4rem 0 0 4rem;
- }  
+}  
 
+.left:hover {
+  background: linear-gradient(to right, #002fbcd3, #0331bcc6,#0630aeac, #0734ba84, transparent 100%);
+ }
+
+ .right:hover {
+  background: linear-gradient(to left, #002fbcd3, #0331bcc6,#0630aeac, #0734ba84, transparent 100%);
+ }
  
 }
 

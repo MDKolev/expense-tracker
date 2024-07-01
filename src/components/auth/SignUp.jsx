@@ -27,6 +27,7 @@ const SignUp = () => {
         userCredentials.email,
         userCredentials.password
       );
+      alert("Account created! You may log in!")
     } catch (err) {
       setError(err.message)
     }
