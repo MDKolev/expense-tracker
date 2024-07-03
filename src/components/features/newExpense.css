@@ -1,0 +1,172 @@
+.modal-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+}
+
+.modal {
+  position: absolute;
+  transform: translateY(100%);
+  width: 80%;
+  max-width: 500px;
+  background-color: #fefefe;
+  border: 1px solid #888;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  flex: 1;
+  font-weight: bold;
+}
+
+.input-group input,
+.input-group textarea {
+  flex: 2;
+  padding: 5px;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.description-group {
+  flex-direction: column;
+}
+
+.description-group label {
+  margin-bottom: 5px;
+}
+
+.description-group textarea {
+  width: 100%;
+  height: 100px;
+}
+
+.description-group span {
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+
+.switch1 {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch1 input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider1 {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ff1616;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider1:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider1 {
+  background-color: #42de0e;
+}
+
+input:focus + .slider1 {
+  box-shadow: 0 0 1px #e70707;
+}
+
+input:checked + .slider1:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider1.round {
+  border-radius: 34px;
+}
+
+.slider1.round:before {
+  border-radius: 50%;
+}
+
+.expense-or-income{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+
+.add-button {
+  font-size: 1rem;
+  color: green;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  border-bottom: 2px solid green;
+  box-shadow: 10px 5px 5px rgba(7, 173, 29, 0.6); 
+  transition: 0.3s ease;
+}
+
+.add-button:hover{
+  color: #fff;
+  background-color: green;
+  background-color: rgb(1, 183, 1);
+  box-shadow: none;
+}
+
+.cancel-button {
+  font-size: 1rem;
+  color: #ff1616;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  border-bottom: 2px solid #ff1616;
+  box-shadow: 10px 5px 5px rgba(173, 7, 7, 0.6); 
+  transition: 0.3s ease;
+}
+
+.cancel-button:hover{
+  color: #fff;
+  background-color: ff1616;
+  background-color: rgb(220, 17, 17);
+  box-shadow: none;
+}
