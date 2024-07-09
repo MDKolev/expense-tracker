@@ -1,18 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import "./newExpense.css";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../firebase-config/firebase";
+
 
 const NewExpense = () => {
+
+  const [details, setDetails ] = useState("");
+  const [amount, setAmount ] = useState(0);
+  const [type, setType ] = useState(true);
+  const [description, setDescription ] = useState("");
+
+  const expensesCollectionRef = collection(db, "expenses");
+
+  const onAddExpense = async () => {
+    try {
+      await addDoc(expensesCollectionRef, {details,amount,type,description})
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
+
   return (
-    <div class="modal-container">
-      <div id="modal" class="modal">
-        <div class="modal-content">
-          <div class="input-group">
-            <label for="example1">Details:</label>
-            <input type="text" id="example1" name="example1" />
+    <div className="modal-container">
+      <div id="modal" className="modal">
+        <div className="modal-content">
+          <div className="input-group">
+            <label htmlFor="details">Details:</label>
+            <input type="text" id="details" name="details" onChange={(e) => setDetails(e.target.value)}/>
           </div>
-          <div class="input-group">
-            <label for="example2">Amount:</label>
-            <input type="number" id="example2" name="example2" />
+          <div className="input-group">
+            <label htmlFor="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" onChange={(e) => setAmount(Number(e.target.value))}/>
           </div>
 
           <div className="input-group">
@@ -20,22 +40,22 @@ const NewExpense = () => {
               Type:
             </label>
             <div className="expense-or-income">
-              <p>Expense</p>
-              <label class="switch1">
-                <input type="checkbox" />
-                <span class="slider1 round"></span>
-              </label>
               <p>Income</p>
+              <label className="type-switch">
+                <input type="checkbox" checked={type} onChange={(e) => setType(e.target.checked)}/>
+                <span className="type-slider round"></span>
+              </label>
+              <p>Expense</p>
             </div>
           </div>
 
-          <div class="input-group description-group">
-            <label for="description">Description:</label>
-            <textarea id="description" name="description"></textarea>
+          <div className="input-group description-group">
+            <label htmlFor="description">Description:</label>
+            <textarea id="description" name="description" onChange={(e) => setDescription(e.target.value)}></textarea>
             <span>Note: Provide additional details here.</span>
           </div>
           <div className="button-container">
-            <button className="add-button">Add</button>
+            <button className="add-button" onClick={onAddExpense}>Add</button>
             <button className="cancel-button">Cancel</button>
           </div>
         </div>
