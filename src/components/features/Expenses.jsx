@@ -1,22 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./expenses.css";
 import { CiFilter, CiStickyNote, CiEdit, CiTrash } from "react-icons/ci";
 import NewExpense from "./NewExpense";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../../firebase-config/firebase";
 
 const Expenses = () => {
-
   const [showNewExpense, setShowNewExpense] = useState(false);
+  const [expensesList, setExpensesList] = useState([]);
+
+  const expensesCollectionRef = collection(db, "expenses");
+
+  useEffect(() => {
+    const getExpensesList = async () => {
+      try {
+        const data = await getDocs(expensesCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setExpensesList(filteredData)
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getExpensesList();
+  }, []);
 
   const handleToggleButton = () => {
-    setShowNewExpense(prevShowNewExpense=> !prevShowNewExpense)
-  }
+    setShowNewExpense((prevShowNewExpense) => !prevShowNewExpense);
+  };
 
   return (
     <div>
-      {showNewExpense &&  <NewExpense/>}
+      {showNewExpense && <NewExpense />}
       <div className="feature-header">
         <h1>Expenses</h1>
-        <button className="add-btn" onClick={handleToggleButton}>+ New Expense</button>
+        <button className="add-btn" onClick={handleToggleButton}>
+          + New Expense
+        </button>
         <button className="filter-btn">
           <CiFilter />
         </button>
@@ -33,102 +56,28 @@ const Expenses = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Row 1, Column 1</td>
-              <td>Row 1, Column 2</td>
-              <td>Row 1, Column 3</td>
-              <td className="td-note">
-                <CiStickyNote className="note-icon" />
-              </td>
+
+          
+            {expensesList.map((expense) => (
+              
+
+              <tr key={expense.id}>
+                <td>
+                  <p className="date">{expense.date.toDate().toString()}</p>
+              
+                  {expense.details}
+                </td>
+                <td>{expense.type ? "Expense" : "Income"}</td>
+                <td>{expense.amount}</td>
+                <td className="td-note">
+                <CiStickyNote className="note-icon" /></td>
               <td className="td-action">
                 <CiEdit className="edit-icon" />
                 <CiTrash className="delete-icon" />
               </td>
-            </tr>
-            <tr>
-              <td>Row 2, Column 1</td>
-              <td>Row 2, Column 2</td>
-              <td>Row 2, Column 3</td>
-              <td className="td-note">
-                <CiStickyNote className="note-icon" />
-              </td>
-              <td className="td-action">
-                <CiEdit className="edit-icon" />{" "}
-                <CiTrash className="delete-icon" />
-              </td>
-            </tr>
-            <tr>
-              <td>Row 3, Column 1</td>
-              <td>Row 3, Column 2</td>
-              <td>Row 3, Column 3</td>
-              <td className="td-note">
-                <CiStickyNote className="note-icon" />
-              </td>
-              <td className="td-action">
-                <CiEdit className="edit-icon" />
-                <CiTrash className="delete-icon" />
-              </td>
-            </tr>
-            <tr>
-              <td>Row 4, Column 1</td>
-              <td>Row 4, Column 2</td>
-              <td>Row 4, Column 3</td>
-              <td className="td-note">
-                <CiStickyNote className="note-icon" />
-              </td>
-              <td className="td-action">
-                <CiEdit className="edit-icon" />{" "}
-                <CiTrash className="delete-icon" />
-              </td>
-            </tr>
-            <tr>
-              <td>Row 5, Column 1</td>
-              <td>Row 5, Column 2</td>
-              <td>Row 5, Column 3</td>
-              <td className="td-note">
-                <CiStickyNote className="note-icon" />
-              </td>
-              <td className="td-action">
-                <CiEdit className="edit-icon" />{" "}
-                <CiTrash className="delete-icon" />
-              </td>
-            </tr>
-            <tr>
-              <td>Row 6, Column 1</td>
-              <td>Row 6, Column 2</td>
-              <td>Row 6, Column 3</td>
-              <td className="td-note">
-                <CiStickyNote className="note-icon" />
-              </td>
-              <td className="td-action">
-                <CiEdit className="edit-icon" />
-                <CiTrash className="delete-icon" />
-              </td>
-            </tr>
-            <tr>
-              <td>Row 7, Column 1</td>
-              <td>Row 7, Column 2</td>
-              <td>Row 7, Column 3</td>
-              <td className="td-note">
-                <CiStickyNote className="note-icon" />
-              </td>
-              <td className="td-action">
-                <CiEdit className="edit-icon" />
-                <CiTrash className="delete-icon" />
-              </td>
-            </tr>
-            <tr>
-              <td>Row 8, Column 1</td>
-              <td>Row 8, Column 2</td>
-              <td>Row 8, Column 3</td>
-              <td className="td-note">
-                <CiStickyNote className="note-icon" />
-              </td>
-              <td className="td-action">
-                <CiEdit className="edit-icon" />
-                <CiTrash className="delete-icon" />
-              </td>
-            </tr>
+              </tr>
+            ))}
+
           </tbody>
         </table>
       </div>
