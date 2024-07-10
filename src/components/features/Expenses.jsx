@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./expenses.css";
 import { CiFilter, CiStickyNote, CiEdit, CiTrash } from "react-icons/ci";
 import NewExpense from "./NewExpense";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase-config/firebase";
 
 const Expenses = () => {
@@ -31,6 +31,16 @@ const Expenses = () => {
   const handleToggleButton = () => {
     setShowNewExpense((prevShowNewExpense) => !prevShowNewExpense);
   };
+
+  const handleDelete = async(id) => {
+    try{
+      const deleteExpense = doc(db, "expenses", id);
+      await deleteDoc(deleteExpense)
+      setExpensesList(expensesList.filter((expense) => expense.id !== id));
+    } catch(err) {
+      console.error(err);
+    }
+  }
 
   return (
     <div>
@@ -73,7 +83,7 @@ const Expenses = () => {
                 <CiStickyNote className="note-icon" /></td>
               <td className="td-action">
                 <CiEdit className="edit-icon" />
-                <CiTrash className="delete-icon" />
+                <CiTrash className="delete-icon" onClick={() => handleDelete(expense.id)}/>
               </td>
               </tr>
             ))}
