@@ -4,7 +4,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase-config/firebase";
 
 
-const NewExpense = ({onClose}) => {
+const NewExpense = ({onClose,}) => {
 
   const [details, setDetails ] = useState("");
   const [amount, setAmount ] = useState(0);

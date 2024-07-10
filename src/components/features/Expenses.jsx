@@ -10,23 +10,25 @@ const Expenses = () => {
   const [expensesList, setExpensesList] = useState([]);
 
   const expensesCollectionRef = collection(db, "expenses");
+  
+  const getExpensesList = async () => {
+    try {
+      const data = await getDocs(expensesCollectionRef);
+      const filteredData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+
+      setExpensesList(filteredData)
+    } catch (err) {
+      console.error(err);
+    }
+    
+  };
 
   useEffect(() => {
-    const getExpensesList = async () => {
-      try {
-        const data = await getDocs(expensesCollectionRef);
-        const filteredData = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setExpensesList(filteredData)
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
     getExpensesList();
-  }, []);
+  });
 
   const handleToggleButton = () => {
     setShowNewExpense((prevShowNewExpense) => !prevShowNewExpense);
@@ -44,7 +46,7 @@ const Expenses = () => {
 
   return (
     <div>
-      {showNewExpense && <NewExpense onClose={handleToggleButton}/>}
+      {showNewExpense && <NewExpense onClose={handleToggleButton} onAdd={getExpensesList}/>}
       <div className="feature-header">
         <h1>Expenses</h1>
         <button className="add-btn" onClick={handleToggleButton}>
