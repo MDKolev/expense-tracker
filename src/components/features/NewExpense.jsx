@@ -4,7 +4,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase-config/firebase";
 
 
-const NewExpense = () => {
+const NewExpense = ({onClose}) => {
 
   const [details, setDetails ] = useState("");
   const [amount, setAmount ] = useState(0);
@@ -13,11 +13,14 @@ const NewExpense = () => {
 
   const expensesCollectionRef = collection(db, "expenses");
 
-  const onAddExpense = async () => {
+  const handleAddExpense = async () => {
     try {
       await addDoc(expensesCollectionRef, {details,amount,type,description})
+      alert("Expense added successfully!")
+      onClose();
     } catch(err) {
       console.error(err);
+      alert("An error has occured! Please, try again.")
     }
   }
 
@@ -55,8 +58,8 @@ const NewExpense = () => {
             <span>Note: Provide additional details here.</span>
           </div>
           <div className="button-container">
-            <button className="add-button" onClick={onAddExpense}>Add</button>
-            <button className="cancel-button">Cancel</button>
+            <button className="add-button" onClick={handleAddExpense}>Add</button>
+            <button className="cancel-button" onClick={onClose}>Cancel</button>
           </div>
         </div>
       </div>

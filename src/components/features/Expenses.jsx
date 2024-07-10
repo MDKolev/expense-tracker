@@ -34,7 +34,7 @@ const Expenses = () => {
 
   return (
     <div>
-      {showNewExpense && <NewExpense />}
+      {showNewExpense && <NewExpense onClose={handleToggleButton}/>}
       <div className="feature-header">
         <h1>Expenses</h1>
         <button className="add-btn" onClick={handleToggleButton}>
@@ -63,7 +63,7 @@ const Expenses = () => {
 
               <tr key={expense.id}>
                 <td>
-                  <p className="date">{expense.date.toDate().toString()}</p>
+                  <p className="date">{expense?.date?.toDate().toString()}</p>
               
                   {expense.details}
                 </td>
