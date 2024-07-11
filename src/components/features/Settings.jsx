@@ -31,23 +31,23 @@ const Settings = () => {
           <div className="appearance-modes">
             <div className="light">
               <p>Light</p>
-              <label class="switch">
+              <label className="switch">
                 <input type="checkbox" />
-                <span class="slider round"></span>
+                <span className="slider round"></span>
               </label>
             </div>
             <div className="dark">
               <p>Dark</p>
-              <label class="switch">
+              <label className="switch">
                 <input type="checkbox" />
-                <span class="slider round"></span>
+                <span className="slider round"></span>
               </label>
             </div>
             <div className="dawn">
               <p>Dawn</p>
-              <label class="switch">
+              <label className="switch">
                 <input type="checkbox" />
-                <span class="slider round"></span>
+                <span className="slider round"></span>
               </label>
             </div>
           </div>
