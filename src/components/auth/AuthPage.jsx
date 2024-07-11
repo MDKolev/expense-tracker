@@ -29,7 +29,7 @@ const AuthPage = () => {
     try {
       await signInWithPopup(auth, googleProvider)
     } catch(err) {
-      alert(err.message)
+      console.log(err.message);
     }
   }
 
