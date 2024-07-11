@@ -3,8 +3,8 @@ import "./signIn.css";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
-import { auth } from "../../firebase-config/firebase";
-import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { auth, googleProvider } from "../../firebase-config/firebase";
+import { sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 const SignIn = () => {
   const [userCredentials, setUserCredentials] = useState({});
@@ -34,6 +34,14 @@ const SignIn = () => {
     const email = prompt("Please enter your email");
     sendPasswordResetEmail(auth, email);
     alert('Email sent! Check your inbox for password reset instructions.')
+  }
+
+  const handleSignInWithGoogle = async() => {
+    try {
+      await signInWithPopup(auth, googleProvider)
+    } catch(err) {
+      setError(err.message)
+    }
   }
 
   return (
@@ -70,7 +78,7 @@ const SignIn = () => {
       </button>
       <p>
         Or Sign In With
-        <FcGoogle className="google-icon" />{" "}
+        <FcGoogle className="google-icon" onClick={handleSignInWithGoogle}/>{" "}
       </p>
     </div>
   );
