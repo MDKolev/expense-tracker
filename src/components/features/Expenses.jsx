@@ -4,9 +4,11 @@ import { CiFilter, CiStickyNote, CiEdit, CiTrash } from "react-icons/ci";
 import NewExpense from "./NewExpense";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase-config/firebase";
+import EditExpense from "./EditExpense";
 
 const Expenses = () => {
   const [showNewExpense, setShowNewExpense] = useState(false);
+  const [showEditExpense, setShowEditExpense] = useState(false);
   const [expensesList, setExpensesList] = useState([]);
 
   const expensesCollectionRef = collection(db, "expenses");
@@ -29,9 +31,15 @@ const Expenses = () => {
     getExpensesList();
   });
 
-  const handleToggleButton = () => {
+  const handleAddExpense = () => {
     setShowNewExpense((prevShowNewExpense) => !prevShowNewExpense);
   };
+
+  const handleEditExpense = () => {
+    setShowEditExpense((prevShowEditExpense) => !prevShowEditExpense);
+  };
+
+  
 
   const handleDelete = async (id) => {
     try {
@@ -46,11 +54,14 @@ const Expenses = () => {
   return (
     <div>
       {showNewExpense && (
-        <NewExpense onClose={handleToggleButton} onAdd={getExpensesList} />
+        <NewExpense onClose={handleAddExpense} onAdd={getExpensesList} />
+      )}
+       {showEditExpense && (
+        <EditExpense onClose={handleEditExpense} onAdd={getExpensesList} />
       )}
       <div className="feature-header">
         <h1>Expenses</h1>
-        <button className="add-btn" onClick={handleToggleButton}>
+        <button className="add-btn" onClick={handleAddExpense}>
           + New Expense
         </button>
         <button className="filter-btn">
@@ -84,7 +95,7 @@ const Expenses = () => {
                 </td>
 
                 <td className="td-action">
-                  <CiEdit className="edit-icon" />
+                  <CiEdit className="edit-icon"  onClick={handleEditExpense}/>
                   <CiTrash
                     className="delete-icon"
                     onClick={() => handleDelete(expense.id)}
