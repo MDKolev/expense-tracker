@@ -10,7 +10,7 @@ const Expenses = () => {
   const [expensesList, setExpensesList] = useState([]);
 
   const expensesCollectionRef = collection(db, "expenses");
-  
+
   const getExpensesList = async () => {
     try {
       const data = await getDocs(expensesCollectionRef);
@@ -19,11 +19,10 @@ const Expenses = () => {
         id: doc.id,
       }));
 
-      setExpensesList(filteredData)
+      setExpensesList(filteredData);
     } catch (err) {
       console.error(err);
     }
-    
   };
 
   useEffect(() => {
@@ -34,19 +33,21 @@ const Expenses = () => {
     setShowNewExpense((prevShowNewExpense) => !prevShowNewExpense);
   };
 
-  const handleDelete = async(id) => {
-    try{
+  const handleDelete = async (id) => {
+    try {
       const deleteExpense = doc(db, "expenses", id);
-      await deleteDoc(deleteExpense)
+      await deleteDoc(deleteExpense);
       setExpensesList(expensesList.filter((expense) => expense.id !== id));
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   return (
     <div>
-      {showNewExpense && <NewExpense onClose={handleToggleButton} onAdd={getExpensesList}/>}
+      {showNewExpense && (
+        <NewExpense onClose={handleToggleButton} onAdd={getExpensesList} />
+      )}
       <div className="feature-header">
         <h1>Expenses</h1>
         <button className="add-btn" onClick={handleToggleButton}>
@@ -68,28 +69,29 @@ const Expenses = () => {
             </tr>
           </thead>
           <tbody>
-
-          
             {expensesList.map((expense) => (
-              
-
               <tr key={expense.id}>
                 <td>
                   <p className="date">{expense?.date?.toDate().toString()}</p>
-              
+
                   {expense.details}
                 </td>
                 <td>{expense.type ? "Expense" : "Income"}</td>
                 <td>{expense.amount}</td>
                 <td className="td-note">
-                <CiStickyNote className="note-icon" /></td>
-              <td className="td-action">
-                <CiEdit className="edit-icon" />
-                <CiTrash className="delete-icon" onClick={() => handleDelete(expense.id)}/>
-              </td>
+                  <CiStickyNote className="note-icon" />
+                <div className="note">{expense.description}</div>
+                </td>
+
+                <td className="td-action">
+                  <CiEdit className="edit-icon" />
+                  <CiTrash
+                    className="delete-icon"
+                    onClick={() => handleDelete(expense.id)}
+                  />
+                </td>
               </tr>
             ))}
-
           </tbody>
         </table>
       </div>

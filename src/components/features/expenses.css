@@ -63,7 +63,7 @@
     height: 100%;
     margin: 0 1rem;
     border-radius: 1rem;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
   
   
@@ -135,10 +135,7 @@
 
   .date {
     font-size: 0.75rem;
-  }
-
- 
- 
+  } 
   }
 
   .pagination{
@@ -148,6 +145,33 @@
     button{
       font-size: 1.5rem;
     }
+}
 
- 
+.td-note {
+position: relative;
+}
+
+.note {
+  width: 200px;
+  height: 140px;
+  position: absolute;
+  bottom: 0;
+  right: 140px;
+  border-radius: 0.5rem;
+  padding: 0 0.25rem;
+  box-sizing: border-box;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgb(86, 86, 86),
+    rgb(86, 86, 86) 1px,
+    rgb(190, 190, 2) 1px,
+    rgb(190, 190, 2) 20px
+  );
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 20.5px;
+  visibility: hidden;
+}
+
+.note-icon:hover + .note {
+  visibility: visible;
 }
