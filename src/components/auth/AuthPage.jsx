@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./authPage.css";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import { auth, googleProvider } from "../../firebase-config/firebase";
+import { signInWithPopup } from "firebase/auth";
 
 const AuthPage = () => {
   const [showSignIn, setShowSignIn] = useState(true);
@@ -23,10 +25,18 @@ const AuthPage = () => {
     setShowRight((prevSetShowRight) => !prevSetShowRight);
   };
 
+  const handleSignInWithGoogle = async() => {
+    try {
+      await signInWithPopup(auth, googleProvider)
+    } catch(err) {
+      alert(err.message)
+    }
+  }
+
   return (
     <div className="container">
       <div className="sign-in-container">
-        {showSignIn && <SignIn />}
+        {showSignIn && <SignIn signInWithGoogle={handleSignInWithGoogle}/>}
         {showRight && (
           <div className="right" onClick={handleSignInToggle}>
             <h1>No Account?</h1>
@@ -36,7 +46,7 @@ const AuthPage = () => {
       </div>
       <div className="separator"></div>
       <div className="sign-up-container">
-        {showSignUp && <SignUp />}
+        {showSignUp && <SignUp signInWithGoogle={handleSignInWithGoogle}/>}
         {showLeft && (
           <div className="left" onClick={handleSignUpToggle}>
             <h1>Already registered?</h1>

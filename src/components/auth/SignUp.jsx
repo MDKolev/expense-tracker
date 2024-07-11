@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import "./signUp.css";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { FaUser } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { auth } from "../../firebase-config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-const SignUp = () => {
+const SignUp = ({signInWithGoogle}) => {
   const [userCredentials, setUserCredentials] = useState({});
   const [error, setError] = useState("")
 
@@ -73,8 +72,8 @@ const SignUp = () => {
       >
         Sign Up
       </button>
-      <p>
-        Or Sign Up With
+      <p onClick={signInWithGoogle}>
+        Or Sign In With
         <FcGoogle className="google-icon" />{" "}
       </p>
     </div>
