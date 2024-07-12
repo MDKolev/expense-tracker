@@ -10,6 +10,7 @@ const Expenses = () => {
   const [showNewExpense, setShowNewExpense] = useState(false);
   const [showEditExpense, setShowEditExpense] = useState(false);
   const [expensesList, setExpensesList] = useState([]);
+  const [currentExpenseId, setCurrentExpenseId] = useState(null);
 
   const expensesCollectionRef = collection(db, "expenses");
 
@@ -35,11 +36,10 @@ const Expenses = () => {
     setShowNewExpense((prevShowNewExpense) => !prevShowNewExpense);
   };
 
-  const handleEditExpense = () => {
+  const handleEditExpense = (id) => {
+    setCurrentExpenseId(id);
     setShowEditExpense((prevShowEditExpense) => !prevShowEditExpense);
   };
-
-  
 
   const handleDelete = async (id) => {
     try {
@@ -56,9 +56,14 @@ const Expenses = () => {
       {showNewExpense && (
         <NewExpense onClose={handleAddExpense} onAdd={getExpensesList} />
       )}
-       {showEditExpense && (
-        <EditExpense onClose={handleEditExpense} onAdd={getExpensesList} />
+      {showEditExpense && (
+        <EditExpense
+          onClose={handleEditExpense}
+          onAdd={getExpensesList}
+          expenseId={currentExpenseId}
+        />
       )}
+
       <div className="feature-header">
         <h1>Expenses</h1>
         <button className="add-btn" onClick={handleAddExpense}>
@@ -91,11 +96,14 @@ const Expenses = () => {
                 <td>{expense.amount}</td>
                 <td className="td-note">
                   <CiStickyNote className="note-icon" />
-                <div className="note">{expense.description}</div>
+                  <div className="note">{expense.description}</div>
                 </td>
 
                 <td className="td-action">
-                  <CiEdit className="edit-icon"  onClick={handleEditExpense}/>
+                  <CiEdit
+                    className="edit-icon"
+                    onClick={() => handleEditExpense(expense.id)}
+                  />
                   <CiTrash
                     className="delete-icon"
                     onClick={() => handleDelete(expense.id)}

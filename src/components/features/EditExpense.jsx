@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 import "./editExpense.css";
-import { addDoc, collection } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase-config/firebase";
 
 
-const EditExpense = ({onClose,}) => {
+const EditExpense = ({onClose, expenseId}) => {
 
   const [details, setDetails ] = useState("");
   const [amount, setAmount ] = useState(0);
   const [type, setType ] = useState(true);
   const [description, setDescription ] = useState("");
 
-  const expensesCollectionRef = collection(db, "expenses");
 
-  const handleAddExpense = async () => {
+  const handleEditExpense = async() => {
     try {
-      await addDoc(expensesCollectionRef, {details,amount,type,description})
-      alert("Expense added successfully!")
-      onClose();
+      const docRef = doc(db, "expenses", expenseId);
+    await updateDoc(docRef, {
+      details,
+      type,
+      amount,
+      description,
+    });
+    alert("Expense edited successfully!")
+    onClose();
     } catch(err) {
       console.error(err);
       alert("An error has occured! Please, try again.")
@@ -58,7 +63,7 @@ const EditExpense = ({onClose,}) => {
             <span>Note: Provide additional details here.</span>
           </div>
           <div className="button-container">
-            <button className="edit-button" onClick={handleAddExpense}>Edit</button>
+            <button className="edit-button" onClick={() => handleEditExpense()}>Edit</button>
             <button className="cancel-button" onClick={onClose}>Cancel</button>
           </div>
         </div>
