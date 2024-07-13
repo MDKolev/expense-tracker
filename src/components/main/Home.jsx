@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./home.css";
 import profilePic from "../../assets/profile-pic.jpeg";
 import { GiMoneyStack } from "react-icons/gi";
@@ -11,19 +11,16 @@ import { auth } from "../../firebase-config/firebase";
 import { useNavigate } from "react-router-dom";
 
 
-const Home = ({ emailOfUser }) => {
+const Home = () => {
   const [isActive, setIsActive] = useState(true);
   const [isExpensesActive, setIsExpensesActive] = useState(true);
   const [isSettingsActive, setIsSettingsActive] = useState(false);
   const navigate = useNavigate();
+  const [userEmail, setUserEmail] = useState("")
 
   const handleToggle = () => {
     setIsExpensesActive((prevExpensesActive) => !prevExpensesActive);
     setIsSettingsActive((prevSettingsActive) => !prevSettingsActive);
-  };
-
-  const handleClick = () => {
-    console.log(emailOfUser);
   };
 
   const handleLogout = async() => {
@@ -35,13 +32,20 @@ const Home = ({ emailOfUser }) => {
     }
   }
 
+  useEffect(() => {
+    const storedUserEmail = localStorage.getItem('userEmail');
+    if(storedUserEmail) {
+      setUserEmail(storedUserEmail)
+    }
+  }, [])
+
+
   return (
     <div className="home-container">
       <div className="sidebar">
         <div>
           <img src={profilePic} alt="" className="profile-pic" />
-          <span>Example Username</span>
-
+          <span>{userEmail}</span>
           <button className="feature-btn" onClick={handleToggle}>
             <GiMoneyStack className="feature-icon" /> Expenses
           </button>
@@ -50,14 +54,14 @@ const Home = ({ emailOfUser }) => {
           </button>
         </div>
 
-        <button className="logout-btn" onClick={handleLogout} >
+        <button className="logout-btn" onClick={handleLogout}>
           <IoLogOutOutline className="logout-icon" /> Logout
         </button>
       </div>
 
       <div className="feature-window">
         {isExpensesActive && <Expenses />}
-        {isSettingsActive && <Settings />}
+        {isSettingsActive && <Settings userEmail={userEmail}/>}
       </div>
     </div>
   );

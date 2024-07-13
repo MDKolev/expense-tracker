@@ -2,7 +2,7 @@ import React from "react";
 import "./settings.css";
 import profilePic from "../../assets/profile-pic.jpeg";
 
-const Settings = () => {
+const Settings = ({userEmail}) => {
   return (
     <>
       <div className="feature-header">
@@ -15,7 +15,7 @@ const Settings = () => {
             <h3>Username</h3>
             <p>username</p>
             <h3>Email</h3>
-            <p>email</p>
+            <p>{userEmail}</p>
             <h3>Joined</h3>
             <p>30/06/2024</p>
           </div>

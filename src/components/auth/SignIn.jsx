@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./signIn.css";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { auth } from "../../firebase-config/firebase";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = ({signInWithGoogle}) => {
   const [userCredentials, setUserCredentials] = useState({});
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleCredentials = (e) => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
@@ -25,6 +27,8 @@ const SignIn = ({signInWithGoogle}) => {
         userCredentials.email,
         userCredentials.password
       );
+      localStorage.setItem('userEmail', userCredentials.email)
+      navigate("/home")
     } catch (err) {
       setError(err.message);
     }
