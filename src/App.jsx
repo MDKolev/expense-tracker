@@ -1,3 +1,4 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AuthPage from "./components/auth/AuthPage";
 import Home from "./components/main/Home";
@@ -5,8 +6,12 @@ import Home from "./components/main/Home";
 function App() {
   return (
     <>
-      {/* <AuthPage /> */}
-      <Home/>
+      <BrowserRouter>
+        <Routes>
+          <Route index path="/" element={ <AuthPage />}></Route>
+          <Route path="/home" element={<Home />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
