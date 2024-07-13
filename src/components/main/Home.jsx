@@ -17,6 +17,7 @@ const Home = () => {
   const [isSettingsActive, setIsSettingsActive] = useState(false);
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("")
+  const [userCreationTime,  setUserCreationTime] = useState("")
 
   const handleToggle = () => {
     setIsExpensesActive((prevExpensesActive) => !prevExpensesActive);
@@ -34,8 +35,10 @@ const Home = () => {
 
   useEffect(() => {
     const storedUserEmail = localStorage.getItem('userEmail');
+    const storedUserCreationTime = localStorage.getItem('creationTime')
     if(storedUserEmail) {
       setUserEmail(storedUserEmail)
+      setUserCreationTime(storedUserCreationTime)
     }
   }, [])
 
@@ -61,7 +64,7 @@ const Home = () => {
 
       <div className="feature-window">
         {isExpensesActive && <Expenses />}
-        {isSettingsActive && <Settings userEmail={userEmail}/>}
+        {isSettingsActive && <Settings userEmail={userEmail} userCreationTime={userCreationTime}/>}
       </div>
     </div>
   );

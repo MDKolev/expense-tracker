@@ -26,6 +26,9 @@ const SignUp = ({signInWithGoogle}) => {
         userCredentials.email,
         userCredentials.password
       );
+      console.log(auth.currentUser);
+      const user = auth.currentUser;
+      localStorage.setItem('creationTime', user.metadata.creationTime)
       alert("Account created! You may log in!")
     } catch (err) {
       setError(err.message)
