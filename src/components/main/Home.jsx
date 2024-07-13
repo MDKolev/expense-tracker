@@ -12,18 +12,20 @@ import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
-  const [isActive, setIsActive] = useState(true);
   const [isExpensesActive, setIsExpensesActive] = useState(true);
   const [isSettingsActive, setIsSettingsActive] = useState(false);
-  const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("")
-  const [userCreationTime,  setUserCreationTime] = useState("")
+  const [userCreationTime,  setUserCreationTime] = useState("");
+  const [imageURL, setImageURL] = useState(null);
+  
+  const navigate = useNavigate();
 
+  
   const handleToggle = () => {
     setIsExpensesActive((prevExpensesActive) => !prevExpensesActive);
     setIsSettingsActive((prevSettingsActive) => !prevSettingsActive);
   };
-
+  
   const handleLogout = async() => {
     try {
       await signOut(auth);
@@ -32,13 +34,15 @@ const Home = () => {
       console.error(err);
     }
   }
-
+  
   useEffect(() => {
     const storedUserEmail = localStorage.getItem('userEmail');
     const storedUserCreationTime = localStorage.getItem('creationTime')
+    const storedUserProfileImage = localStorage.getItem('lastUploadedImage')
     if(storedUserEmail) {
       setUserEmail(storedUserEmail)
       setUserCreationTime(storedUserCreationTime)
+      setImageURL(storedUserProfileImage)
     }
   }, [])
 
@@ -47,7 +51,7 @@ const Home = () => {
     <div className="home-container">
       <div className="sidebar">
         <div>
-          <img src={profilePic} alt="" className="profile-pic" />
+          <img src={imageURL || profilePic} alt="" className="profile-pic" />
           <span>{userEmail}</span>
           <button className="feature-btn" onClick={handleToggle}>
             <GiMoneyStack className="feature-icon" /> Expenses
@@ -64,7 +68,7 @@ const Home = () => {
 
       <div className="feature-window">
         {isExpensesActive && <Expenses />}
-        {isSettingsActive && <Settings userEmail={userEmail} userCreationTime={userCreationTime}/>}
+        {isSettingsActive && <Settings userEmail={userEmail} userCreationTime={userCreationTime} imageURL={imageURL} setImageURL={setImageURL}/>}
       </div>
     </div>
   );

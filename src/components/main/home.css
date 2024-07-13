@@ -10,7 +10,9 @@
 
 
   .profile-pic{
-    border-radius: 50% 50% 20% 20%;
+    width: 100%;
+    height: 230px;
+    border-radius: 20% 20% 20% 20%;
   }
   
   span {

@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./settings.css";
 import profilePic from "../../assets/profile-pic.jpeg";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { storage } from "../../firebase-config/firebase.js";
 
-const Settings = ({userEmail, userCreationTime}) => {
+const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL }) => {
+  const [profileImage, setProfileImage] = useState(null);
+
+  const uploadFile = async () => {
+    if (!profileImage) return;
+    const storageRef = ref(storage, `profilePictures/${profileImage.name}`);
+
+    try {
+      await uploadBytes(storageRef, profileImage);
+      const url = await getDownloadURL(storageRef);
+      localStorage.setItem("lastUploadedImage", url);
+      const retrievedUrl = localStorage.getItem("lastUploadedImage");
+      setImageURL(retrievedUrl);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleClickOnInput = () => {
+    document.getElementById("fileInput").click();
+  }
+
   return (
     <>
       <div className="feature-header">
@@ -12,17 +35,31 @@ const Settings = ({userEmail, userCreationTime}) => {
         <div className="account-info">
           <div className="personal-info-container">
             <h2>Personal Information</h2>
-            {/* <h3>Username</h3>
-            <p>username</p> */}
-            {/* <h3>Email</h3> */}
+            <h3>Username</h3>
+            <p>username</p>
+            <h3>Email</h3>
             <p>{userEmail}</p>
             <h3>Joined</h3>
             <p>{userCreationTime}</p>
           </div>
           <div className="profile-pic-container">
             <h2>Change Avatar</h2>
-            <img src={profilePic} alt="" />
-            <button className="save-btn">Save Avatar</button>
+              <img
+                src={imageURL || profilePic}
+                alt=""
+                type="file"
+                className="profile-image"
+                onClick={handleClickOnInput}
+              />
+            <input
+              className="upload-file-input"
+              type="file"
+              id="fileInput"
+              onChange={(e) => setProfileImage(e.target.files[0])}
+            />
+            <button className="save-btn" onClick={uploadFile}>
+              Save Avatar
+            </button>
           </div>
         </div>
 
