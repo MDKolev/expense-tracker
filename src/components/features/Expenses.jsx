@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./expenses.css";
 import { CiFilter, CiStickyNote, CiEdit, CiTrash } from "react-icons/ci";
 import NewExpense from "./NewExpense";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase-config/firebase";
+import { getDocs, collection, deleteDoc, doc, where } from "firebase/firestore";
+import { db, auth } from "../../firebase-config/firebase";
 import EditExpense from "./EditExpense";
 
 const Expenses = () => {
@@ -12,17 +12,20 @@ const Expenses = () => {
   const [expensesList, setExpensesList] = useState([]);
   const [currentExpenseId, setCurrentExpenseId] = useState(null);
 
-  const expensesCollectionRef = collection(db, "expenses");
-
   const getExpensesList = async () => {
     try {
-      const data = await getDocs(expensesCollectionRef);
-      const filteredData = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-
-      setExpensesList(filteredData);
+      const user = auth.currentUser;
+      if (user) {
+        const userExpensesCollectionRef = collection(db, `users/${user.uid}/expenses`);
+        const data = await getDocs(userExpensesCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setExpensesList(filteredData);
+      } else {
+        alert("User is not authenticated.");
+      }
     } catch (err) {
       console.error(err);
     }
