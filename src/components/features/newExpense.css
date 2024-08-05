@@ -42,6 +42,10 @@
   border-radius: 0.25rem;
 }
 
+#currency {
+  margin: 10px;
+}
+
 .description-group {
   flex-direction: column;
 }

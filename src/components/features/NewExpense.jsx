@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./newExpense.css";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../firebase-config/firebase";
+import { db, auth } from "../../firebase-config/firebase";
 
 
 const NewExpense = ({onClose,}) => {
@@ -10,17 +10,30 @@ const NewExpense = ({onClose,}) => {
   const [amount, setAmount ] = useState(0);
   const [type, setType ] = useState(true);
   const [description, setDescription ] = useState("");
+  const [currency, setCurrency] = useState("EUR");
 
-  const expensesCollectionRef = collection(db, "expenses");
 
   const handleAddExpense = async () => {
     try {
-      await addDoc(expensesCollectionRef, {details,amount,type,description})
-      alert("Expense added successfully!")
-      onClose();
-    } catch(err) {
+      const user = auth.currentUser;
+      if (user) {
+        const userExpensesCollectionRef = collection(db, `users/${user.uid}/expenses`);
+        await addDoc(userExpensesCollectionRef, {
+          details,
+          amount,
+          type,
+          description,
+          currency,
+          date: new Date()
+        });
+        alert("Expense added successfully!");
+        onClose();
+      } else {
+        alert("User is not authenticated. Please, log in.");
+      }
+    } catch (err) {
       console.error(err);
-      alert("An error has occured! Please, try again.")
+      alert("An error has occurred! Please, try again.");
     }
   }
 
@@ -36,6 +49,16 @@ const NewExpense = ({onClose,}) => {
           <div className="input-group">
             <label htmlFor="amount">Amount:</label>
             <input type="number" id="amount" name="amount" onChange={(e) => setAmount(Number(e.target.value))}/>
+            <select
+              id="currency"
+              name="currency"
+              onChange={(e) => setCurrency(e.target.value)}
+              value={currency}
+            >
+              <option value="EUR">EUR</option>
+              <option value="BGN">BGN</option>
+              <option value="USD">USD</option>
+            </select>
           </div>
 
           <div className="input-group">
