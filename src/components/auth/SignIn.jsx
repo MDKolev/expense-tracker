@@ -6,6 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { auth } from "../../firebase-config/firebase";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
 
 const SignIn = ({signInWithGoogle}) => {
   const [userCredentials, setUserCredentials] = useState({});
@@ -39,6 +40,17 @@ const SignIn = ({signInWithGoogle}) => {
     sendPasswordResetEmail(auth, email);
     alert('Email sent! Check your inbox for password reset instructions.')
   }
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        localStorage.setItem('currentUserID', currentUser.uid)
+        console.log(currentUser.uid);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="login-container">
