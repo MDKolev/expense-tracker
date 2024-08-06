@@ -103,7 +103,7 @@ const Expenses = () => {
                   {expense.details}
                 </td>
                 <td>{expense.type ? "Expense" : "Income"}</td>
-                <td>{expense.amount}</td>
+                <td>{expense.amount} {expense.currency}</td>
                 <td className="td-note">
                   <CiStickyNote className="note-icon" />
                   <div className="note">{expense.description}</div>
