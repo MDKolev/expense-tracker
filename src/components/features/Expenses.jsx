@@ -52,8 +52,9 @@ const Expenses = () => {
   };
 
   const handleDelete = async (id) => {
+    const user = auth.currentUser;
     try {
-      const deleteExpense = doc(db, "expenses", id);
+      const deleteExpense = doc(db, `users/${user.uid}/expenses`, id);
       await deleteDoc(deleteExpense);
       setExpensesList(expensesList.filter((expense) => expense.id !== id));
     } catch (err) {
