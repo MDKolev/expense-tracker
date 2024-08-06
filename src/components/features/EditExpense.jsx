@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./editExpense.css";
 import { updateDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase-config/firebase";
+import { db, auth } from "../../firebase-config/firebase";
 
 
 const EditExpense = ({onClose, expenseId}) => {
@@ -10,15 +10,18 @@ const EditExpense = ({onClose, expenseId}) => {
   const [amount, setAmount ] = useState(0);
   const [type, setType ] = useState(true);
   const [description, setDescription ] = useState("");
+  const [currency, setCurrency ] = useState("EUR");
 
 
   const handleEditExpense = async() => {
+    const user = auth.currentUser;
     try {
-      const docRef = doc(db, "expenses", expenseId);
+      const docRef = doc(db, `users/${user.uid}/expenses`, expenseId);
     await updateDoc(docRef, {
       details,
       type,
       amount,
+      currency,
       description,
     });
     alert("Expense edited successfully!")
@@ -36,11 +39,21 @@ const EditExpense = ({onClose, expenseId}) => {
         <div className="modal-content">
           <div className="input-group">
             <label htmlFor="details">Details:</label>
-            <input type="text" id="details" name="details" onChange={(e) => setDetails(e.target.value)}/>
+            <input type="text" id="details" name="details"  onChange={(e) => setDetails(e.target.value)}/>
           </div>
           <div className="input-group">
-            <label htmlFor="amount">Amount:</label>
+          <label htmlFor="amount">Amount:</label>
             <input type="number" id="amount" name="amount" onChange={(e) => setAmount(Number(e.target.value))}/>
+            <select
+              id="currency"
+              name="currency"
+              onChange={(e) => setCurrency(e.target.value)}
+              value={currency}
+            >
+              <option value="EUR">EUR</option>
+              <option value="BGN">BGN</option>
+              <option value="USD">USD</option>
+            </select>
           </div>
 
           <div className="input-group">
@@ -69,7 +82,6 @@ const EditExpense = ({onClose, expenseId}) => {
         </div>
       </div>
     </div>
-
   );
 };
 
