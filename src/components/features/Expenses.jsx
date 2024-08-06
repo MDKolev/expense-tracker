@@ -18,10 +18,17 @@ const Expenses = () => {
       if (user) {
         const userExpensesCollectionRef = collection(db, `users/${user.uid}/expenses`);
         const data = await getDocs(userExpensesCollectionRef);
-        const filteredData = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
+        const filteredData = data.docs.map((doc) => {
+        const expenseData = doc.data();
+        const dateCreated = expenseData.date;
+        const formattedDate = dateCreated.toDate().toDateString();
+       
+          return {
+            ...expenseData,
+            id: doc.id,
+            date: formattedDate
+          };
+        });
         setExpensesList(filteredData);
       } else {
         alert("User is not authenticated.");
@@ -91,7 +98,7 @@ const Expenses = () => {
             {expensesList.map((expense) => (
               <tr key={expense.id}>
                 <td>
-                  <p className="date">{expense?.date?.toDate().toString()}</p>
+                  <p className="date">{expense?.date}</p>
 
                   {expense.details}
                 </td>
