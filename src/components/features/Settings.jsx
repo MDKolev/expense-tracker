@@ -2,29 +2,45 @@ import React, { useEffect, useState } from "react";
 import "./settings.css";
 import profilePic from "../../assets/profile-pic.jpeg";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "../../firebase-config/firebase.js";
+import { storage, auth, db } from "../../firebase-config/firebase.js";
+import { doc, setDoc } from "firebase/firestore";
 
 const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL }) => {
   const [profileImage, setProfileImage] = useState(null);
 
-  const uploadFile = async () => {
+  const handleUploadImage = async () => {
     if (!profileImage) return;
-    const storageRef = ref(storage, `profilePictures/${profileImage.name}`);
 
-    try {
-      await uploadBytes(storageRef, profileImage);
-      const url = await getDownloadURL(storageRef);
-      localStorage.setItem("lastUploadedImage", url);
-      const retrievedUrl = localStorage.getItem("lastUploadedImage");
-      setImageURL(retrievedUrl);
-    } catch (err) {
-      console.error(err);
+    const user = auth.currentUser;
+    if (!user) return;
+    const userUID = localStorage.getItem("currentUserID");
+    if ((user.uid = userUID)) {
+      const storageRef = ref(
+        storage,
+        `profilePictures/${user.uid}/${profileImage.name}`
+      );
+
+      try {
+        await uploadBytes(storageRef, profileImage);
+        const downloadURL = await getDownloadURL(storageRef);
+        console.log("File available at", downloadURL);
+
+        await setDoc(
+          doc(db, "users", user.uid),
+          { profileImageUrl: downloadURL },
+          { merge: true }
+        );
+
+        setImageURL(downloadURL);
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
   const handleClickOnInput = () => {
     document.getElementById("fileInput").click();
-  }
+  };
 
   return (
     <>
@@ -44,20 +60,20 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL }) => {
           </div>
           <div className="profile-pic-container">
             <h2>Change Avatar</h2>
-              <img
-                src={imageURL || profilePic}
-                alt=""
-                type="file"
-                className="profile-image"
-                onClick={handleClickOnInput}
-              />
+            <img
+              src={imageURL || profilePic}
+              alt=""
+              type="file"
+              className="profile-image"
+              onClick={handleClickOnInput}
+            />
             <input
               className="upload-file-input"
               type="file"
               id="fileInput"
               onChange={(e) => setProfileImage(e.target.files[0])}
             />
-            <button className="save-btn" onClick={uploadFile}>
+            <button className="save-btn" onClick={handleUploadImage}>
               Save Avatar
             </button>
           </div>

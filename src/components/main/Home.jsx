@@ -7,8 +7,9 @@ import Expenses from "../features/Expenses";
 import Settings from "../features/Settings";
 import { IoLogOutOutline } from "react-icons/io5";
 import { signOut } from "firebase/auth";
-import { auth } from "../../firebase-config/firebase";
+import { auth, db } from "../../firebase-config/firebase";
 import { useNavigate } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
 
 
 const Home = () => {
@@ -38,13 +39,33 @@ const Home = () => {
   useEffect(() => {
     const storedUserEmail = localStorage.getItem('userEmail');
     const storedUserCreationTime = localStorage.getItem('creationTime')
-    const storedUserProfileImage = localStorage.getItem('lastUploadedImage')
     if(storedUserEmail) {
       setUserEmail(storedUserEmail)
       setUserCreationTime(storedUserCreationTime)
-      setImageURL(storedUserProfileImage)
+    }
+
+    const user = auth.currentUser;
+    if (user) {
+      fetchUserProfileImage(user.uid).then((url) => {
+        if (url) {
+          setImageURL(url);
+        }
+      });
     }
   }, [])
+
+  const fetchUserProfileImage = async (userId) => {
+    const userDocRef = doc(db, "users", userId);
+    const userDoc = await getDoc(userDocRef);
+  
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      return userData.profileImageUrl || null;
+    } else {
+      console.log("No such document!");
+      return null;
+    }
+  };
 
 
   return (
