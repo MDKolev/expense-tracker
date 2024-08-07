@@ -11,37 +11,40 @@ import { auth, db } from "../../firebase-config/firebase";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 
-
 const Home = () => {
   const [isExpensesActive, setIsExpensesActive] = useState(true);
   const [isSettingsActive, setIsSettingsActive] = useState(false);
-  const [userEmail, setUserEmail] = useState("")
-  const [userCreationTime,  setUserCreationTime] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userCreationTime, setUserCreationTime] = useState("");
   const [imageURL, setImageURL] = useState(null);
-  
+
   const navigate = useNavigate();
 
-  
-  const handleToggle = () => {
-    setIsExpensesActive((prevExpensesActive) => !prevExpensesActive);
-    setIsSettingsActive((prevSettingsActive) => !prevSettingsActive);
+  const handleToggleExpenses = () => {
+      setIsExpensesActive(true);
+      setIsSettingsActive(false);
   };
-  
-  const handleLogout = async() => {
+
+  const handleToggleSettings = () => {
+    setIsExpensesActive(false);
+    setIsSettingsActive(true);
+};
+
+  const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate("/")
-    } catch(err) {
+      navigate("/");
+    } catch (err) {
       console.error(err);
     }
-  }
-  
+  };
+
   useEffect(() => {
-    const storedUserEmail = localStorage.getItem('userEmail');
-    const storedUserCreationTime = localStorage.getItem('creationTime')
-    if(storedUserEmail) {
-      setUserEmail(storedUserEmail)
-      setUserCreationTime(storedUserCreationTime)
+    const storedUserEmail = localStorage.getItem("userEmail");
+    const storedUserCreationTime = localStorage.getItem("creationTime");
+    if (storedUserEmail) {
+      setUserEmail(storedUserEmail);
+      setUserCreationTime(storedUserCreationTime);
     }
 
     const user = auth.currentUser;
@@ -52,12 +55,12 @@ const Home = () => {
         }
       });
     }
-  }, [])
+  }, []);
 
   const fetchUserProfileImage = async (userId) => {
     const userDocRef = doc(db, "users", userId);
     const userDoc = await getDoc(userDocRef);
-  
+
     if (userDoc.exists()) {
       const userData = userDoc.data();
       return userData.profileImageUrl || null;
@@ -67,17 +70,16 @@ const Home = () => {
     }
   };
 
-
   return (
     <div className="home-container">
       <div className="sidebar">
         <div>
           <img src={imageURL || profilePic} alt="" className="profile-pic" />
           <span>{userEmail}</span>
-          <button className="feature-btn" onClick={handleToggle}>
+          <button className="feature-btn" onClick={handleToggleExpenses}>
             <GiMoneyStack className="feature-icon" /> Expenses
           </button>
-          <button className="feature-btn" onClick={handleToggle}>
+          <button className="feature-btn" onClick={handleToggleSettings}>
             <FiSettings className="feature-icon" /> Settings
           </button>
         </div>
@@ -89,7 +91,14 @@ const Home = () => {
 
       <div className="feature-window">
         {isExpensesActive && <Expenses />}
-        {isSettingsActive && <Settings userEmail={userEmail} userCreationTime={userCreationTime} imageURL={imageURL} setImageURL={setImageURL}/>}
+        {isSettingsActive && (
+          <Settings
+            userEmail={userEmail}
+            userCreationTime={userCreationTime}
+            imageURL={imageURL}
+            setImageURL={setImageURL}
+          />
+        )}
       </div>
     </div>
   );
