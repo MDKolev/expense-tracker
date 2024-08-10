@@ -1,0 +1,18 @@
+.pagination {
+  margin-top: 0.5rem;
+}
+
+.page-number {
+  padding: 0 0.25rem;
+  margin: 0 0.5rem;
+  transition: 0.3s ease;
+}
+
+.page-number:hover {
+  color: #fff;
+}
+
+.active {
+  background-color: #05378e;
+  color: #fff;
+}

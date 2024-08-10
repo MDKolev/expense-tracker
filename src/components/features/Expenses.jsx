@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./expenses.css";
 import { CiFilter, CiStickyNote, CiEdit, CiTrash } from "react-icons/ci";
 import NewExpense from "./NewExpense";
-import { getDocs, collection, deleteDoc, doc, where } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import EditExpense from "./EditExpense";
+import Pagination from "../features/util/Pagination.jsx";
 
 const Expenses = () => {
   const [showNewExpense, setShowNewExpense] = useState(false);
@@ -12,21 +13,33 @@ const Expenses = () => {
   const [expensesList, setExpensesList] = useState([]);
   const [currentExpenseId, setCurrentExpenseId] = useState(null);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = expensesList.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const getExpensesList = async () => {
     try {
       const user = auth.currentUser;
       if (user) {
-        const userExpensesCollectionRef = collection(db, `users/${user.uid}/expenses`);
+        const userExpensesCollectionRef = collection(
+          db,
+          `users/${user.uid}/expenses`
+        );
         const data = await getDocs(userExpensesCollectionRef);
         const filteredData = data.docs.map((doc) => {
-        const expenseData = doc.data();
-        const dateCreated = expenseData.date;
-        const formattedDate = dateCreated.toDate().toDateString();
-       
+          const expenseData = doc.data();
+          const dateCreated = expenseData.date;
+          const formattedDate = dateCreated.toDate().toDateString();
+
           return {
             ...expenseData,
             id: doc.id,
-            date: formattedDate
+            date: formattedDate,
           };
         });
         setExpensesList(filteredData);
@@ -96,20 +109,20 @@ const Expenses = () => {
             </tr>
           </thead>
           <tbody>
-            {expensesList.map((expense) => (
+            {currentItems.map((expense) => (
               <tr key={expense.id}>
                 <td>
                   <p className="date">{expense?.date}</p>
-
                   {expense.details}
                 </td>
                 <td>{expense.type ? "Expense" : "Income"}</td>
-                <td>{expense.amount} {expense.currency}</td>
+                <td>
+                  {expense.amount} {expense.currency}
+                </td>
                 <td className="td-note">
                   <CiStickyNote className="note-icon" />
                   <div className="note">{expense.description}</div>
                 </td>
-
                 <td className="td-action">
                   <CiEdit
                     className="edit-icon"
@@ -125,9 +138,12 @@ const Expenses = () => {
           </tbody>
         </table>
       </div>
-      <div className="pagination">
-        <button>1</button>
-      </div>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={expensesList.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
