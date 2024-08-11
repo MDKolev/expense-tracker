@@ -94,5 +94,6 @@
 
 .error {
   font-size: 1rem;
-  color: rgb(253, 20, 20);
+  background-color: rgb(253, 20, 20);
+  color: #fff;
 }
