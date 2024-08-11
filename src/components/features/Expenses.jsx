@@ -12,7 +12,8 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import EditExpense from "./EditExpense";
-import Pagination from "../features/util/Pagination.jsx";
+import Pagination from "./utils/Pagination.jsx";
+import Filter from "./utils/Filter.jsx";
 
 const Expenses = () => {
   const [showNewExpense, setShowNewExpense] = useState(false);
@@ -105,6 +106,7 @@ const Expenses = () => {
         <button className="filter-btn">
           <CiFilter />
         </button>
+        <Filter />
       </div>
       <div className="expense-info">
         <table className="table">
