@@ -5,11 +5,17 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage, auth, db } from "../../firebase-config/firebase.js";
 import { doc, setDoc } from "firebase/firestore";
 
-const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL, setUsernameInHome }) => {
+const Settings = ({
+  userEmail,
+  userCreationTime,
+  imageURL,
+  setImageURL,
+  setUsernameInHome,
+}) => {
   const [profileImage, setProfileImage] = useState(null);
   const [username, setUsername] = useState("");
   const [isUsernameSet, setIsUsernameSet] = useState(false);
-  const [theme, setTheme] = useState("dawn");
+  const [theme, setTheme] = useState(null);
 
   const handleUploadImage = async () => {
     if (!profileImage) return;
@@ -69,19 +75,14 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL, setUsern
 
   const handleThemeChange = (newTheme) => {
     setTheme(newTheme);
+    localStorage.setItem('theme', newTheme)
   };
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    const storedTheme = localStorage.getItem("theme", theme);    
+    setTheme(storedTheme);
   }, [theme]);
-
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme) {
-      setTheme(storedTheme);
-    }
-  }, []);
 
   return (
     <>
