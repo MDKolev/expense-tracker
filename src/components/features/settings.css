@@ -22,6 +22,28 @@
       font-size: 1rem;
       padding-left: 2rem;
     }
+    .username-container{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .username-button {
+        margin-right: 5rem;
+        padding: 0 1rem;
+        font-size: 1rem;
+        color: #000;
+        transition: 0.3s ease;
+        border-radius: 0.5rem;
+        border-bottom: 2px solid #05378e;
+        box-shadow: 10px 10px 5px rgba(10, 13, 169, 0.6); 
+      }
+
+      .username-button:hover{
+        color: #fff;
+        background-color: #05378e;
+        box-shadow: none;
+      }
+    }
   }
 
   .profile-pic-container{
@@ -30,7 +52,6 @@
     h2{
       font-size: 1.5rem;
     }
-
 
 
     img{

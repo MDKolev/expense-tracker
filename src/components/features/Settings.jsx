@@ -52,7 +52,10 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL }) => {
           <div className="personal-info-container">
             <h2>Personal Information</h2>
             <h3>Username</h3>
-            <p>username</p>
+            <div className="username-container">
+              <p>username</p>
+              <button className="username-button">Set Username</button>
+            </div>
             <h3>Email</h3>
             <p>{userEmail}</p>
             <h3>Joined</h3>

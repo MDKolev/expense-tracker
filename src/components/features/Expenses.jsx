@@ -13,7 +13,7 @@ import {
 import { db, auth } from "../../firebase-config/firebase";
 import EditExpense from "./EditExpense";
 import Pagination from "./utils/Pagination.jsx";
-import Filter from "./utils/Filter.jsx";
+// import Filter from "./utils/Filter.jsx";
 
 const Expenses = () => {
   const [showNewExpense, setShowNewExpense] = useState(false);
