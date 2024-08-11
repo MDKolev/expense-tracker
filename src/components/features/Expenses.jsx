@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./expenses.css";
 import { CiFilter, CiStickyNote, CiEdit, CiTrash } from "react-icons/ci";
 import NewExpense from "./NewExpense";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import EditExpense from "./EditExpense";
 import Pagination from "../features/util/Pagination.jsx";
@@ -30,19 +37,21 @@ const Expenses = () => {
           db,
           `users/${user.uid}/expenses`
         );
-        const data = await getDocs(userExpensesCollectionRef);
-        const filteredData = data.docs.map((doc) => {
-          const expenseData = doc.data();
-          const dateCreated = expenseData.date;
-          const formattedDate = dateCreated.toDate().toDateString();
 
-          return {
-            ...expenseData,
-            id: doc.id,
-            date: formattedDate,
-          };
-        });
-        setExpensesList(filteredData);
+        const expensesQuery = query(
+          userExpensesCollectionRef,
+          orderBy("date", "desc")
+        );
+
+        const querySnapshot = await getDocs(expensesQuery);
+
+        const expenses = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+          date: doc.data().date.toDate().toLocaleString(),
+        }));
+
+        setExpensesList(expenses);
       } else {
         alert("User is not authenticated.");
       }
@@ -53,7 +62,7 @@ const Expenses = () => {
 
   useEffect(() => {
     getExpensesList();
-  });
+  }, []);
 
   const handleAddExpense = () => {
     setShowNewExpense((prevShowNewExpense) => !prevShowNewExpense);
