@@ -72,23 +72,24 @@
     border-bottom: 2px solid #05378e;
     font-size: 1.25rem;
     text-transform: uppercase;
-    background-color: #5b5b5b;
+    background-color: var(--table-header-color);
     text-align: start;
+    color: var(--table-header-text-color);
   }
 
   tr:nth-child(odd){
-    background-color: #b2b2b2;
+    background-color: var(--td-odd-color);
   }
 
   tr:nth-child(even){
-    background-color: #939393;
+    background-color: var(--td-even-color);
   }
 
   td{
     padding: 0.2rem 1rem;
     font-size: 1rem;
     text-align: start;
-    color: #000;
+    color: var(--td-text-color);
   }
 
 
@@ -144,6 +145,11 @@
     justify-content: center;
     button{
       font-size: 1.5rem;
+      color: var(--text-color);
+    }
+
+    button:hover{
+      color: var(--button-text-color)
     }
 }
 

@@ -9,6 +9,7 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL, setUsern
   const [profileImage, setProfileImage] = useState(null);
   const [username, setUsername] = useState("");
   const [isUsernameSet, setIsUsernameSet] = useState(false);
+  const [theme, setTheme] = useState("dawn");
 
   const handleUploadImage = async () => {
     if (!profileImage) return;
@@ -65,6 +66,24 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL, setUsern
       alert("Please enter a username.");
     }
   };
+
+  const toggleTheme = (themeName) => {
+    setTheme(themeName);
+  };
+
+  useEffect(() => {
+    // Apply the selected theme to the root element
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
+    // On initial load, check if a theme is stored in localStorage
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+  }, []);
 
   return (
     <>
@@ -128,14 +147,14 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL, setUsern
             <div className="light">
               <p>Light</p>
               <label className="switch">
-                <input type="checkbox" />
+                <input type="checkbox" onClick={() => toggleTheme("light")}/>
                 <span className="slider round"></span>
               </label>
             </div>
             <div className="dark">
               <p>Dark</p>
               <label className="switch">
-                <input type="checkbox" />
+                <input type="checkbox" onClick={() => toggleTheme("dark")}/>
                 <span className="slider round"></span>
               </label>
             </div>

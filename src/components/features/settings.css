@@ -4,6 +4,8 @@
   justify-content: start;
   margin: 0 1rem;
   width: 100%;
+  color: var(--text-color);
+
 
   .personal-info-container{
     flex: 1;
@@ -29,14 +31,14 @@
 
       .username-input{
         margin-left: 2rem;
-        background-color: #ffffffbe;
+        background-color: var(--feature-window-color);
       }
 
       .username-button {
         margin-right: 5rem;
         padding: 0 1rem;
         font-size: 1rem;
-        color: #000;
+        color: var(--button-text-color);
         transition: 0.3s ease;
         border-radius: 0.5rem;
         border-bottom: 2px solid #05378e;
@@ -55,9 +57,11 @@
 
   .profile-pic-container{
     flex:1;
+    color: var(--text-color);
 
     h2{
       font-size: 1.5rem;
+      
     }
 
 
@@ -72,7 +76,7 @@
     .save-btn{
       font-size: 1.2rem;
       padding: 0 1rem;
-      color: #000;
+      color: var(--button-text-color);
       transition: 0.3s ease;
       border-radius: 0.5rem;
       border-bottom: 2px solid #05378e;
@@ -95,6 +99,7 @@
 
 .appearance-container{
   margin-top: 2rem;
+  color: var(--text-color);
 
   h2{
     font-size: 1.5rem;
