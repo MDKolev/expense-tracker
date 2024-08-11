@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./newExpense.css";
 import { addDoc, collection } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
+import { toast } from "sonner";
 
 
 const NewExpense = ({onClose,}) => {
@@ -26,14 +27,14 @@ const NewExpense = ({onClose,}) => {
           currency,
           date: new Date()
         });
-        alert("Expense added successfully!");
+        toast.success("Expense added successfully!")
         onClose();
       } else {
-        alert("User is not authenticated. Please, log in.");
+        toast.error("User is not authenticated. Please, log in.");
       }
     } catch (err) {
       console.error(err);
-      alert("An error has occurred! Please, try again.");
+      toast.error("An error has occurred! Please, try again.");
     }
   }
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./editExpense.css";
 import { updateDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
+import { toast } from "sonner";
 
 
 const EditExpense = ({onClose, expenseId}) => {
@@ -24,11 +25,11 @@ const EditExpense = ({onClose, expenseId}) => {
       currency,
       description,
     });
-    alert("Expense edited successfully!")
+    toast.success("Expense edited successfully!")
     onClose();
     } catch(err) {
       console.error(err);
-      alert("An error has occured! Please, try again.")
+      toast.error("An error has occured! Please, try again.")
     }
   }
 

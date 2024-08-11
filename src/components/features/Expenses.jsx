@@ -13,6 +13,7 @@ import {
 import { db, auth } from "../../firebase-config/firebase";
 import EditExpense from "./EditExpense";
 import Pagination from "./utils/Pagination.jsx";
+import { toast } from "sonner";
 // import Filter from "./utils/Filter.jsx";
 
 const Expenses = () => {
@@ -56,7 +57,7 @@ const Expenses = () => {
 
         setExpensesList(expenses);
       } else {
-        alert("User is not authenticated.");
+        toast.error("User is not authenticated.")
       }
     } catch (err) {
       console.error(err);
@@ -87,6 +88,7 @@ const Expenses = () => {
     try {
       const deleteExpense = doc(db, `users/${user.uid}/expenses`, id);
       await deleteDoc(deleteExpense);
+      toast.success("An expense has been successfully deleted!")
       setExpensesList(expensesList.filter((expense) => expense.id !== id));
     } catch (err) {
       console.error(err);

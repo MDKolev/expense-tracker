@@ -4,6 +4,7 @@ import profilePic from "../../assets/profile-pic.jpeg";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage, auth, db } from "../../firebase-config/firebase.js";
 import { doc, setDoc } from "firebase/firestore";
+import { toast } from "sonner";
 
 const Settings = ({
   userEmail,
@@ -39,6 +40,7 @@ const Settings = ({
           { profileImageUrl: downloadURL },
           { merge: true }
         );
+        toast.success("Avatar successfully changed!")
 
         setImageURL(downloadURL);
       } catch (err) {
@@ -49,6 +51,7 @@ const Settings = ({
 
   const handleClickOnInput = () => {
     document.getElementById("fileInput").click();
+    toast.info("Select an image for your avatar.")
   };
 
   const handleClick = async () => {
@@ -64,12 +67,14 @@ const Settings = ({
 
           setIsUsernameSet(true);
           setUsernameInHome(username);
+          toast.success("Username successfully changed!")
         } catch (err) {
           console.error("Error updating username: ", err);
+          toast.error("Error updating username: ", err);
         }
       }
     } else {
-      alert("Please enter a username.");
+      toast.error("Please enter a username.");
     }
   };
 

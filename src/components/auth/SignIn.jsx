@@ -38,7 +38,7 @@ const SignIn = ({signInWithGoogle}) => {
   const handlePasswordReset = () => {
     const email = prompt("Please enter your email");
     sendPasswordResetEmail(auth, email);
-    alert('Email sent! Check your inbox for password reset instructions.')
+    toast.info('Email sent! Check your inbox for password reset instructions.')
   }
 
   useEffect(() => {
