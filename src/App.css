@@ -24,6 +24,8 @@ body {
   --td-text-color: #000;
   --button-text-color: #05378e;
   --backdrop-filter: sepia(100%) blur(2px);
+  --modal-container-color: #f6a464;
+  --modal-input-color: #e67541;
 }
 
 [data-theme="dark"] {
@@ -36,7 +38,8 @@ body {
   --td-text-color: #c7c6c6;
   --button-text-color: #05378e;
   --backdrop-filter: brightness(30%) blur(2px);
-
+  --modal-container-color: #000;
+  --modal-input-color: #3a3a3a;
 }
 
 [data-theme="light"] {
@@ -49,4 +52,6 @@ body {
   --td-text-color: #000;
   --button-text-color: #05378e;
   --backdrop-filter: blur(2px);
+  --modal-container-color: #fdfdfd;
+  --modal-input-color: #ededed;
 }
