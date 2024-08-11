@@ -57,7 +57,7 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL, setUsern
           );
 
           setIsUsernameSet(true);
-          setUsernameInHome(username); 
+          setUsernameInHome(username);
         } catch (err) {
           console.error("Error updating username: ", err);
         }
@@ -67,18 +67,16 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL, setUsern
     }
   };
 
-  const toggleTheme = (themeName) => {
-    setTheme(themeName);
+  const handleThemeChange = (newTheme) => {
+    setTheme(newTheme);
   };
 
   useEffect(() => {
-    // Apply the selected theme to the root element
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 
   useEffect(() => {
-    // On initial load, check if a theme is stored in localStorage
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme) {
       setTheme(storedTheme);
@@ -147,21 +145,36 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL, setUsern
             <div className="light">
               <p>Light</p>
               <label className="switch">
-                <input type="checkbox" onClick={() => toggleTheme("light")}/>
+                <input
+                  type="radio"
+                  name="theme"
+                  checked={theme === "light"}
+                  onChange={() => handleThemeChange("light")}
+                />
                 <span className="slider round"></span>
               </label>
             </div>
             <div className="dark">
               <p>Dark</p>
               <label className="switch">
-                <input type="checkbox" onClick={() => toggleTheme("dark")}/>
+                <input
+                  type="radio"
+                  name="theme"
+                  checked={theme === "dark"}
+                  onChange={() => handleThemeChange("dark")}
+                />
                 <span className="slider round"></span>
               </label>
             </div>
             <div className="dawn">
               <p>Dawn</p>
               <label className="switch">
-                <input type="checkbox" />
+                <input
+                  type="radio"
+                  name="theme"
+                  checked={theme === "dawn"}
+                  onChange={() => handleThemeChange("dawn")}
+                />
                 <span className="slider round"></span>
               </label>
             </div>
