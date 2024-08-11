@@ -27,6 +27,11 @@
       align-items: center;
       justify-content: space-between;
 
+      .username-input{
+        margin-left: 2rem;
+        background-color: #ffffffbe;
+      }
+
       .username-button {
         margin-right: 5rem;
         padding: 0 1rem;
@@ -43,6 +48,8 @@
         background-color: #05378e;
         box-shadow: none;
       }
+
+
     }
   }
 

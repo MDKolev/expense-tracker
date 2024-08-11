@@ -7,6 +7,8 @@ import { doc, setDoc } from "firebase/firestore";
 
 const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL }) => {
   const [profileImage, setProfileImage] = useState(null);
+  const [username, setUsername] = useState("");
+  const [isUsernameSet, setIsUsernameSet] = useState(false);
 
   const handleUploadImage = async () => {
     if (!profileImage) return;
@@ -42,6 +44,14 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL }) => {
     document.getElementById("fileInput").click();
   };
 
+  const handleClick = () => {
+    if (username.trim() !== "") {
+      setIsUsernameSet(true);
+    } else {
+      alert("Please enter a username.");
+    }
+  };
+
   return (
     <>
       <div className="feature-header">
@@ -53,8 +63,24 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL }) => {
             <h2>Personal Information</h2>
             <h3>Username</h3>
             <div className="username-container">
-              <p>username</p>
-              <button className="username-button">Set Username</button>
+              {!isUsernameSet ? (
+                <>
+                  <input
+                    type="text"
+                    placeholder="no username"
+                    className="username-input"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  <button className="username-button" onClick={handleClick}>
+                    Set Username
+                  </button>
+                </>
+              ) : (
+                <p>
+                  <strong>{username}</strong>
+                </p>
+              )}
             </div>
             <h3>Email</h3>
             <p>{userEmail}</p>
