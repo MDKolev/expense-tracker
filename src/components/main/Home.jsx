@@ -15,6 +15,7 @@ const Home = () => {
   const [isExpensesActive, setIsExpensesActive] = useState(true);
   const [isSettingsActive, setIsSettingsActive] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [userCreationTime, setUserCreationTime] = useState("");
   const [imageURL, setImageURL] = useState(null);
 
@@ -28,7 +29,7 @@ const Home = () => {
   const handleToggleSettings = () => {
     setIsExpensesActive(false);
     setIsSettingsActive(true);
-};
+  };
 
   const handleLogout = async () => {
     try {
@@ -40,42 +41,36 @@ const Home = () => {
   };
 
   useEffect(() => {
-    const storedUserEmail = localStorage.getItem("userEmail");
-    const storedUserCreationTime = localStorage.getItem("creationTime");
-    if (storedUserEmail) {
-      setUserEmail(storedUserEmail);
-      setUserCreationTime(storedUserCreationTime);
-    }
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
 
-    const user = auth.currentUser;
-    if (user) {
-      fetchUserProfileImage(user.uid).then((url) => {
-        if (url) {
-          setImageURL(url);
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setUsername(userData.username || "");
+          setUserEmail(user.email);
+          setUserCreationTime(user.metadata.creationTime);
+
+          if (userData.profileImageUrl) {
+            setImageURL(userData.profileImageUrl);
+          }
+        } else {
+          console.log("No such document!");
         }
-      });
-    }
+      }
+    };
+
+    fetchUserData();
   }, []);
-
-  const fetchUserProfileImage = async (userId) => {
-    const userDocRef = doc(db, "users", userId);
-    const userDoc = await getDoc(userDocRef);
-
-    if (userDoc.exists()) {
-      const userData = userDoc.data();
-      return userData.profileImageUrl || null;
-    } else {
-      console.log("No such document!");
-      return null;
-    }
-  };
 
   return (
     <div className="home-container">
       <div className="sidebar">
         <div>
           <img src={imageURL || profilePic} alt="" className="profile-pic" />
-          <span>{userEmail}</span>
+          <span>{username || userEmail}</span>
           <button className="feature-btn" onClick={handleToggleExpenses}>
             <GiMoneyStack className="feature-icon" /> Expenses
           </button>
@@ -97,6 +92,7 @@ const Home = () => {
             userCreationTime={userCreationTime}
             imageURL={imageURL}
             setImageURL={setImageURL}
+            setUsernameInHome={setUsername} // Pass the setUsername function to update username in Home component
           />
         )}
       </div>

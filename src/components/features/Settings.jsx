@@ -5,7 +5,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage, auth, db } from "../../firebase-config/firebase.js";
 import { doc, setDoc } from "firebase/firestore";
 
-const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL }) => {
+const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL, setUsernameInHome }) => {
   const [profileImage, setProfileImage] = useState(null);
   const [username, setUsername] = useState("");
   const [isUsernameSet, setIsUsernameSet] = useState(false);
@@ -44,9 +44,23 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL }) => {
     document.getElementById("fileInput").click();
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (username.trim() !== "") {
-      setIsUsernameSet(true);
+      const user = auth.currentUser;
+      if (user) {
+        try {
+          await setDoc(
+            doc(db, "users", user.uid),
+            { username },
+            { merge: true }
+          );
+
+          setIsUsernameSet(true);
+          setUsernameInHome(username); 
+        } catch (err) {
+          console.error("Error updating username: ", err);
+        }
+      }
     } else {
       alert("Please enter a username.");
     }
@@ -67,7 +81,7 @@ const Settings = ({ userEmail, userCreationTime, imageURL, setImageURL }) => {
                 <>
                   <input
                     type="text"
-                    placeholder="no username"
+                    placeholder="set your username"
                     className="username-input"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
