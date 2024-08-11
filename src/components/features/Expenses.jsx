@@ -20,6 +20,7 @@ const Expenses = () => {
   const [showEditExpense, setShowEditExpense] = useState(false);
   const [expensesList, setExpensesList] = useState([]);
   const [currentExpenseId, setCurrentExpenseId] = useState(null);
+  const [showFilter, setShowFilter] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
@@ -74,6 +75,10 @@ const Expenses = () => {
     setShowEditExpense((prevShowEditExpense) => !prevShowEditExpense);
   };
 
+  const handleShowFilter = () => {
+    setShowFilter((prevSetShowFilter) => !prevSetShowFilter);
+  };
+
   const handleDelete = async (id) => {
     const user = auth.currentUser;
     try {
@@ -104,9 +109,9 @@ const Expenses = () => {
           + New Expense
         </button>
         <button className="filter-btn">
-          <CiFilter />
+          <CiFilter onClick={handleShowFilter} />
         </button>
-        <Filter />
+        {showFilter && <Filter />}
       </div>
       <div className="expense-info">
         <table className="table">
