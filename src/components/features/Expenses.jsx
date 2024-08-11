@@ -20,6 +20,7 @@ const Expenses = () => {
   const [showEditExpense, setShowEditExpense] = useState(false);
   const [expensesList, setExpensesList] = useState([]);
   const [currentExpenseId, setCurrentExpenseId] = useState(null);
+  const [triggerRefresh, setTriggerRefresh] = useState(false)
   // const [showFilter, setShowFilter] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -64,15 +65,17 @@ const Expenses = () => {
 
   useEffect(() => {
     getExpensesList();
-  }, []);
+  }, [triggerRefresh]);
 
   const handleAddExpense = () => {
     setShowNewExpense((prevShowNewExpense) => !prevShowNewExpense);
+    setTriggerRefresh(prev => !prev);
   };
 
   const handleEditExpense = (id) => {
     setCurrentExpenseId(id);
     setShowEditExpense((prevShowEditExpense) => !prevShowEditExpense);
+    setTriggerRefresh(prev => !prev);
   };
 
   // const handleShowFilter = () => {
