@@ -22,8 +22,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleToggleExpenses = () => {
-      setIsExpensesActive(true);
-      setIsSettingsActive(false);
+    setIsExpensesActive(true);
+    setIsSettingsActive(false);
   };
 
   const handleToggleSettings = () => {
@@ -46,12 +46,12 @@ const Home = () => {
       if (user) {
         const userDocRef = doc(db, "users", user.uid);
         const userDoc = await getDoc(userDocRef);
+        setUserEmail(user.email);
+        setUserCreationTime(user.metadata.creationTime);
 
         if (userDoc.exists()) {
           const userData = userDoc.data();
           setUsername(userData.username || "");
-          setUserEmail(user.email);
-          setUserCreationTime(user.metadata.creationTime);
 
           if (userData.profileImageUrl) {
             setImageURL(userData.profileImageUrl);
