@@ -70,7 +70,7 @@ const Home = () => {
       <div className="sidebar">
         <div>
           <img src={imageURL || profilePic} alt="" className="profile-pic" />
-          <span>{username || userEmail}</span>
+          <span className="user-email">{username || userEmail}</span>
           <button className="feature-btn" onClick={handleToggleExpenses}>
             <GiMoneyStack className="feature-icon" /> Expenses
           </button>

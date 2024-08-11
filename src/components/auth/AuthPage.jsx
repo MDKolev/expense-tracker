@@ -4,12 +4,15 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import { auth, googleProvider } from "../../firebase-config/firebase";
 import { signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
   const [showSignIn, setShowSignIn] = useState(true);
   const [showSignUp, setShowSignUp] = useState(false);
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(true);
+
+  const navigate = useNavigate();
 
   const handleSignInToggle = () => {
     setShowSignIn((prevShowSignIn) => !prevShowSignIn);
@@ -25,18 +28,19 @@ const AuthPage = () => {
     setShowRight((prevSetShowRight) => !prevSetShowRight);
   };
 
-  const handleSignInWithGoogle = async() => {
+  const handleSignInWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, googleProvider)
-    } catch(err) {
+      const googleUser = await signInWithPopup(auth, googleProvider);
+      navigate("/home")
+    } catch (err) {
       console.log(err.message);
     }
-  }
+  };
 
   return (
     <div className="container">
       <div className="sign-in-container">
-        {showSignIn && <SignIn signInWithGoogle={handleSignInWithGoogle}/>}
+        {showSignIn && <SignIn signInWithGoogle={handleSignInWithGoogle} />}
         {showRight && (
           <div className="right" onClick={handleSignInToggle}>
             <h1>No Account?</h1>
@@ -46,7 +50,7 @@ const AuthPage = () => {
       </div>
       <div className="separator"></div>
       <div className="sign-up-container">
-        {showSignUp && <SignUp signInWithGoogle={handleSignInWithGoogle}/>}
+        {showSignUp && <SignUp signInWithGoogle={handleSignInWithGoogle} />}
         {showLeft && (
           <div className="left" onClick={handleSignUpToggle}>
             <h1>Already registered?</h1>
