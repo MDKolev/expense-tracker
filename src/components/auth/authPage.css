@@ -70,17 +70,7 @@
  
 }
 
- /*  */
- /* @media only screen and (max-width: 640px) */
- /* @media (min-width: 601px) and (max-width: 768px) */
- /* @media (min-width: 769px) and (max-width: 1024px) */
- /* @media (min-width: 1025px) and (max-width: 1440px) */
- /* @media (min-width: 1441px) and (max-width: 1920px) */
-
-
-
-
-@media only screen and (max-width: 640px) {
+@media screen and (max-width: 640px) and (orientation: portrait) {
   .container {
     min-width: 95vw;
     height: 90vh;
@@ -131,7 +121,88 @@
   }
 }
 
-@media (min-width: 601px) and (max-width: 768px) {
+@media screen and (max-width: 640px) and (orientation: landscape) {
+  .container {
+    min-width: 85vw;
+    height: 90vh;
+
+    .sign-in-container{
+      .login-container{
+        margin-left: 4rem;
+
+        .title {
+          padding-top: 1rem;
+          margin: 0;
+        }
+
+        .form {
+          margin-left: 0.25rem;
+
+          input {
+            font-size: 1rem;
+          }
+        }
+
+        .sign-in-button {
+          font-size: 1rem;
+        }
+
+        p {
+          font-size: 0.75rem;
+        }
+      }
+      .right {
+        padding: 0;
+        width: 20vw;
+        margin-left: 9rem;
+
+        h1{
+          visibility: hidden;
+        }
+        
+        p {
+          visibility: hidden;
+        }
+      }
+    }
+
+    .sign-up-container{
+      .register-container{
+        .form {
+          width: 75vw;
+          margin-left: 0.25rem;
+          
+          input {
+            font-size: 1rem;
+          }
+        }
+
+        .sign-up-button{
+          font-size: 1rem;
+        }
+
+        p {
+          font-size: 0.75rem;
+        }
+      }
+      .left{
+        padding: 0;
+        width: 20vw;
+        margin-right: 9rem;
+  
+        h1{
+          visibility: hidden;
+        }
+          
+        p {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) and (orientation: portrait){
 
   .container {
     height: 90vh;
