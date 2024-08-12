@@ -70,7 +70,8 @@
  
 }
 
-@media screen and (max-width: 640px) and (orientation: portrait) {
+
+@media screen and (min-width: 320px) and (max-width: 640px) and (orientation: portrait) {
   .container {
     min-width: 95vw;
     height: 90vh;
