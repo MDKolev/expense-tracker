@@ -8,6 +8,7 @@
   border: 1px solid #ffffff1d;
   position: relative;
   backdrop-filter: saturate(20%);
+  overflow: hidden;
 
 
  .sign-in-container, .sign-up-container {
@@ -74,7 +75,7 @@
 @media screen and (min-width: 320px) and (max-width: 640px) and (orientation: portrait) {
   .container {
     min-width: 95vw;
-    height: 90vh;
+    min-height: 80vh;
 
     .sign-in-container{
       .login-container{
@@ -86,7 +87,7 @@
       .right {
         padding: 0;
         width: 20vw;
-        margin-left: 6rem;
+        margin-left: 7.5rem;
         
         h1{
           visibility: hidden;
@@ -108,7 +109,7 @@
       .left{
         padding: 0;
         width: 20vw;
-        margin-right: 6rem;
+        margin-right: 7.5rem;
   
         h1{
           visibility: hidden;
