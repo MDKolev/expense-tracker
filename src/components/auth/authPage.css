@@ -70,4 +70,63 @@
  
 }
 
+ /*  */
+ /* @media only screen and (max-width: 640px) */
+ /* @media (min-width: 601px) and (max-width: 768px) */
+ /* @media (min-width: 769px) and (max-width: 1024px) */
+ /* @media (min-width: 1025px) and (max-width: 1440px) */
+ /* @media (min-width: 1441px) and (max-width: 1920px) */
 
+
+
+
+@media only screen and (max-width: 640px) {
+  .container {
+    min-width: 95vw;
+    height: 90vh;
+
+    .sign-in-container{
+      .login-container{
+        .form {
+          width: 75vw;
+          margin-left: 0.25rem;
+        }
+      }
+      .right {
+        padding: 0;
+        width: 20vw;
+        margin-left: 6rem;
+        
+        h1{
+          visibility: hidden;
+        }
+        
+        p {
+          visibility: hidden;
+        }
+      }
+    }
+
+    .sign-up-container{
+      .register-container{
+        .form {
+          width: 75vw;
+          margin-left: 0.25rem;
+        }
+      }
+      .left{
+        padding: 0;
+        width: 20vw;
+        margin-right: 6rem;
+  
+        h1{
+          visibility: hidden;
+        }
+          
+        p {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+}

@@ -30,7 +30,7 @@ const AuthPage = () => {
 
   const handleSignInWithGoogle = async () => {
     try {
-      const googleUser = await signInWithPopup(auth, googleProvider);
+      signInWithPopup(auth, googleProvider);
       navigate("/home")
     } catch (err) {
       console.log(err.message);
