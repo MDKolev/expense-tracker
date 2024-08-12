@@ -243,3 +243,21 @@
     }
   }
 }
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    min-width: 80vw;
+    .sign-in-container{
+      .right {
+        padding-right: 0;
+        padding-left: 6rem;
+      }
+    }
+
+    .sign-up-container{
+      .left {
+        padding-left: 0;
+      }
+    }
+  }
+}
