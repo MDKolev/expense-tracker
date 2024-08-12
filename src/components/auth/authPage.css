@@ -123,7 +123,7 @@
   }
 }
 
-@media screen and (max-width: 640px) and (orientation: landscape) {
+@media screen and (min-width: 320px) and (max-width: 640px) and (orientation: landscape) {
   .container {
     min-width: 85vw;
     height: 90vh;
@@ -204,7 +204,7 @@
   }
 }
 
-@media (min-width: 601px) and (max-width: 768px) and (orientation: portrait){
+@media (min-width: 641px) and (max-width: 768px) and (orientation: portrait){
 
   .container {
     height: 90vh;
@@ -214,7 +214,7 @@
     .sign-in-container{
       .login-container{
         .title {
-          font-size: 4rem;
+          font-size: 3rem;
           margin-right: 13rem;
         }
 
@@ -239,12 +239,12 @@
         }
 
         .sign-in-button{
-          font-size: 1.75rem;
+          font-size: 1.2rem;
           margin-right: 12rem;
         }
 
         p{
-          font-size: 1.25rem;
+          font-size: 1rem;
           margin-right: 12rem;
         }
       }
@@ -266,7 +266,7 @@
     .sign-up-container{
       .register-container{
         .title {
-          font-size: 4rem;
+          font-size: 3rem;
           margin-left: 13rem;
         }
 
@@ -291,12 +291,12 @@
         }
 
         .sign-up-button{
-          font-size: 1.75rem;
+          font-size: 1.2rem;
           margin-left: 12rem;
         }
 
         p{
-          font-size: 1.25rem;
+          font-size: 1rem;
           margin-left: 12rem;
         }
       }
@@ -311,6 +311,90 @@
 
         p{
           visibility: hidden;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) and (orientation: landscape){
+
+  .container {
+    min-width: 85vw;
+    height: 90vh;
+
+    .sign-in-container{
+      align-items: start;
+      width: 50%;
+      .login-container{
+
+        .title {
+          padding-top: 1rem;
+          margin: 0;
+        }
+
+        .form {
+          margin-left: 0.25rem;
+
+          input {
+            font-size: 1rem;
+          }
+        }
+
+        .sign-in-button {
+          font-size: 1rem;
+        }
+
+        p {
+          font-size: 0.75rem;
+        }
+      }
+      .right {
+        padding: 0;
+        width: 50%;
+
+        h1{
+          font-size: 1.5rem;
+        }
+        
+        p {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .sign-up-container{
+      width: 50%;
+      align-items: end;
+      .register-container{
+        .form {
+          width: 75vw;
+          margin-left: 0.25rem;
+          
+          input {
+            font-size: 1rem;
+          }
+        }
+
+        .sign-up-button{
+          font-size: 1rem;
+        }
+
+        p {
+          font-size: 0.75rem;
+        }
+      }
+      .left{
+        width: 50%;
+        text-align: center;
+        padding-left: 1rem;
+  
+        h1{
+          font-size: 1.5rem;
+        }
+        
+        p {
+          font-size: 1rem;
         }
       }
     }
