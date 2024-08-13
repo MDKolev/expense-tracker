@@ -1,4 +1,4 @@
-.home-container {
+/* .home-container {
   backdrop-filter: var(--backdrop-filter);
   border: 1px solid #fff;
   border-radius: 4rem;
@@ -78,4 +78,139 @@
     border-radius: 2rem;
     flex: 5;
   }
+} */
+
+ /*
+@media screen and (min-width: 320px) and (max-width: 640px) and (orientation: portrait) {
+
+@media screen and (min-width: 320px) and (max-width: 640px) and (orientation: landscape) {
+
+@media (min-width: 641px) and (max-width: 768px) and (orientation: portrait){   
+
+@media (min-width: 641px) and (max-width: 768px) and (orientation: landscape){
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape){
+} */
+
+@media screen and (min-width: 320px) and (max-width: 640px) and (orientation: portrait) {
+  body {
+    min-width: 100vw;
+  }
+  
+  #root{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    
+    .home-container {
+      width: 90%;
+      height: 95%;
+      backdrop-filter: var(--backdrop-filter);
+      border: 1px solid #fff;
+      border-radius: 4rem;
+      display: flex;
+      flex-direction: column-reverse;
+    
+      .sidebar{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        width: 100%;
+        height: 12%;
+
+        .feature-btn {
+          font-size: 0;
+          svg{
+            font-size: 1.5rem;
+          }
+
+          #settings-icon {
+            margin: 0 4.5rem;
+          }
+        }
+
+        .logout-btn {
+          font-size: 0;
+          svg {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+          }
+        }
+
+        .profile-pic{
+          display: none;
+        }
+
+        .user-email {
+          display: none;
+        }
+      }
+    }
+  }
+
+
+  .feature-window {
+    height: 100%;
+    
+    .feature-header {
+      padding: 0 1rem;
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .add-btn {
+        font-size: 0.75rem;
+      }
+
+    }
+
+    .expense-info {
+      /* visibility: hidden; */
+      min-height: 100%;
+      
+
+      .table-row {
+        th {
+          font-size: 0.7rem;
+          padding:0;
+          padding: 1rem 0.5rem;
+         }
+      }
+
+      .td-action {
+        width:70%;
+      }
+
+      .td-note {
+        .note-icon {
+          font-size:1rem;
+        }
+      }
+     
+   
+      td{
+        padding: 0.5rem 0.2rem;
+        font-size: 0.6rem;
+
+        .date {
+          font-size: 0.3rem;
+        }
+      }
+
+      
+    }
+    .pagination {
+      padding-top: 2rem;
+    }
+  }
+
+
+
 }

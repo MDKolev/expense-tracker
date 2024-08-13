@@ -125,7 +125,7 @@ const Expenses = () => {
               <th>Details</th>
               <th>Type</th>
               <th>Amount</th>
-              <th>Note</th>
+              <th id="note">Note</th>
               <th>Action</th>
             </tr>
           </thead>

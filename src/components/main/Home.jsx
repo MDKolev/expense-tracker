@@ -75,7 +75,7 @@ const Home = () => {
             <GiMoneyStack className="feature-icon" /> Expenses
           </button>
           <button className="feature-btn" onClick={handleToggleSettings}>
-            <FiSettings className="feature-icon" /> Settings
+            <FiSettings className="feature-icon" id="settings-icon"/> Settings
           </button>
         </div>
 
