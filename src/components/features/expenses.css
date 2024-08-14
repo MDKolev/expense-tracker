@@ -12,7 +12,6 @@
   }
 
  
-
   .add-btn{
     font-size: 1rem;
     color: green;
@@ -292,4 +291,52 @@ z-index: 0;
   }
       
 
+}
+
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait)  {
+  
+  .feature-window {
+    .feature-header {
+      padding: 0 1rem;
+
+      .add-btn {
+        font-size: 0.9rem;
+      }
+    }
+    
+    .expense-info {
+      min-height: 100%;
+      
+
+      .table-row {
+        th {
+          font-size: 1.3rem;
+          padding: 1rem 0.5rem;
+         }
+      }
+
+      .td-action {
+        width:80%;
+      }
+
+      .td-note {
+        .note-icon {
+          font-size:1.5rem;
+        }
+      }
+     
+   
+      td{
+        padding: 0.5rem 0.2rem;
+        font-size: 1rem;
+
+        .date {
+          font-size: 0.7rem;
+        }
+      }
+
+      
+    }
+  }
+      
 }
