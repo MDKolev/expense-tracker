@@ -40,7 +40,7 @@ const Settings = ({
           { profileImageUrl: downloadURL },
           { merge: true }
         );
-        toast.success("Avatar successfully changed!")
+        toast.success("Avatar successfully changed!");
 
         setImageURL(downloadURL);
       } catch (err) {
@@ -51,7 +51,7 @@ const Settings = ({
 
   const handleClickOnInput = () => {
     document.getElementById("fileInput").click();
-    toast.info("Select an image for your avatar.")
+    toast.info("Select an image for your avatar.");
   };
 
   const handleClick = async () => {
@@ -67,7 +67,7 @@ const Settings = ({
 
           setIsUsernameSet(true);
           setUsernameInHome(username);
-          toast.success("Username successfully changed!")
+          toast.success("Username successfully changed!");
         } catch (err) {
           console.error("Error updating username: ", err);
           toast.error("Error updating username: ", err);
@@ -80,12 +80,12 @@ const Settings = ({
 
   const handleThemeChange = (newTheme) => {
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme)
+    localStorage.setItem("theme", newTheme);
   };
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    const storedTheme = localStorage.getItem("theme", theme);    
+    const storedTheme = localStorage.getItem("theme", theme);
     setTheme(storedTheme);
   }, [theme]);
 
@@ -126,22 +126,24 @@ const Settings = ({
           </div>
           <div className="profile-pic-container">
             <h2>Change Avatar</h2>
-            <img
-              src={imageURL || profilePic}
-              alt=""
-              type="file"
-              className="profile-image"
-              onClick={handleClickOnInput}
-            />
-            <input
-              className="upload-file-input"
-              type="file"
-              id="fileInput"
-              onChange={(e) => setProfileImage(e.target.files[0])}
-            />
-            <button className="save-btn" onClick={handleUploadImage}>
-              Save Avatar
-            </button>
+            <div>
+              <img
+                src={imageURL || profilePic}
+                alt=""
+                type="file"
+                className="profile-image"
+                onClick={handleClickOnInput}
+              />
+              <input
+                className="upload-file-input"
+                type="file"
+                id="fileInput"
+                onChange={(e) => setProfileImage(e.target.files[0])}
+              />
+              <button className="save-btn" onClick={handleUploadImage}>
+                Save Avatar
+              </button>
+            </div>
           </div>
         </div>
 

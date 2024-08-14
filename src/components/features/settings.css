@@ -1,9 +1,7 @@
 .account-info {
   display: flex;
-  /* align-items: center; */
   justify-content: start;
   margin: 0 1rem;
-  width: 100%;
   color: var(--text-color);
 
 
@@ -248,7 +246,105 @@
         }
       }
 
+      .switch input{
+        width: 10rem;
+      }
+
       }    
     
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) and (orientation: portrait) { 
+  
+
+  .feature-window{
+    background-color: var(--feature-window-color);
+    min-width: 50%;
+    .feature-header {
+      padding: 0 1rem;
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+
+    .personal-info-container {
+      margin: 0;
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1rem;
+      }
+
+      p {
+        font-size: 0.8rem;
+      }
+      
+      .username-container {
+        gap:1rem;
+        input {
+          font-size: 0.75rem;
+        }
+
+        .username-button {
+          font-size: 0.75rem;
+        }
+      }
+
+    }
+
+    .account-info {
+      flex-direction: column;
+
+      .personal-info-container {
+        h2 {
+          font-size: 1.25rem;
+        }
+        h3{
+          font-size: 0.9rem;
+        }
+      }
+
+
+      .profile-pic-container {
+        h2 {
+          font-size: 1.25rem;
+        }
+
+        div {
+          display: flex;
+          gap: 1rem;
+          
+          .save-btn {
+            font-size: 1rem;
+            height: 2rem;
+          }
+        }
+    
+        
+      }
+      
+    }
+      .appearance-container {
+        h2 {
+          margin-left: 1rem;
+          font-size: 1.25rem;
+        }
+        
+        
+        .appearance-modes {
+          div {
+            margin-left: 2rem;
+        }
+     }  
+
+     .switch input{
+      width: 10rem;
+    }
+    }    
   }
 }
