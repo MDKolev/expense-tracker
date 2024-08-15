@@ -62,7 +62,6 @@
     height: 100%;
     margin: 0 1rem;
     border-radius: 1rem;
-    /* overflow: hidden; */
   }
   
   
@@ -339,4 +338,245 @@ z-index: 0;
     }
   }
       
+}
+
+@media (min-width: 1025px) and (max-width: 1440px)  {
+  
+  .feature-window {
+    .feature-header {
+      padding: 0 1rem;
+
+
+      .add-btn {
+        font-size: 1rem;
+      }
+    }
+    
+    .expense-info {
+      min-height: 100%;
+      
+
+      .table-row {
+        th {
+          font-size: 1.25rem;
+          padding: 1rem 0.5rem;
+         }
+      }
+
+      .td-action {
+         
+       .edit-icon, .delete-icon{
+         font-size: 1.5rem;
+         cursor: pointer;
+         transition: 0.3s ease;
+          border-radius: 20%;
+    }
+      }
+
+      .td-note {
+        .note-icon {
+          font-size:1.5rem;
+        }
+      }
+     
+   
+      td{
+        padding: 0.5rem 0.2rem;
+        font-size: 1rem;
+
+        .date {
+          font-size: 0.75rem;
+        }
+      }
+
+      
+    }
+  }
+      
+}
+
+@media (min-width: 1441px) {
+  
+  .feature-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem;
+    border-bottom: 2px solid #05378e;
+  
+    h1{
+      flex:1;
+      color:#05378e;
+      font-size: 2rem;
+    }
+  
+   
+    .add-btn{
+      font-size: 1rem;
+      color: green;
+      padding: 0 1rem;
+      border-radius: 0.5rem;
+      border-bottom: 2px solid green;
+      box-shadow: 10px 5px 5px rgba(7, 173, 29, 0.6); 
+      transition: 0.3s ease;
+    }
+    
+    .add-btn:hover{
+      color: #fff;
+      background-color: green;
+      background-color: rgb(1, 183, 1);
+      box-shadow: none;
+    }
+  
+    .filter-btn{
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      padding: 0 0.2rem;
+      border-radius: 0.5rem;
+      border-bottom: 2px solid #05378e;
+      box-shadow: 10px 3px 5px rgba(10, 13, 169, 0.6); 
+      margin-left: 1rem;
+      transition: 0.3s ease;
+    }
+  
+    .filter-btn:hover{
+      color: #fff;
+      background-color: #0744ad;
+      box-shadow: none;
+    }
+  }
+  
+  .expense-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    
+    .table{
+      width: 100%;
+      height: 100%;
+      margin: 0 1rem;
+      border-radius: 1rem;
+    }
+    
+    
+    .table-row th{
+      padding: 1rem 1rem 0 1rem;
+      border-bottom: 2px solid #05378e;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      background-color: var(--table-header-color);
+      text-align: start;
+      color: var(--table-header-text-color);
+    }
+  
+    tr:nth-child(odd){
+      background-color: var(--td-odd-color);
+    }
+  
+    tr:nth-child(even){
+      background-color: var(--td-even-color);
+    }
+  
+    td{
+      padding: 0.2rem 1rem;
+      font-size: 1rem;
+      text-align: start;
+      color: var(--td-text-color);
+    }
+  
+  
+    .note-icon{
+      font-size:1.5rem;
+      cursor: pointer;
+      border-radius: 20%;
+      transition: 0.3s ease;
+    }
+  
+    .note-icon:hover{
+      color: #fff;
+      background-color: rgb(202, 202, 1);
+    }
+    
+  
+    .td-action {
+      display: flex;
+      align-items: center;
+      height: 100%;
+  
+      
+      .edit-icon, .delete-icon{
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: 0.3s ease;
+        border-radius: 20%;
+      }
+      .edit-icon{
+        margin-right: 1rem;
+      }
+  
+      .edit-icon:hover{
+        color: white;
+        background-color: rgb(0, 102, 255);
+      }
+  
+      .delete-icon:hover{
+        color: #fff;
+        background-color: red;
+      }
+    
+    }
+  
+    .date {
+      font-size: 0.75rem;
+    } 
+    }
+  
+    .pagination{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      button{
+        font-size: 1.5rem;
+        color: var(--text-color);
+      }
+  
+      button:hover{
+        color: var(--button-text-color)
+      }
+  }
+  
+  .td-note {
+  position: relative;
+  z-index: 0;
+  }
+  
+  .note {
+    width: 200px;
+    height: 140px;
+    position: absolute;
+    bottom: 0;
+    right: 140px;
+    border-radius: 0.5rem;
+    padding: 0 0.25rem;
+    box-sizing: border-box;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgb(86, 86, 86),
+      rgb(86, 86, 86) 1px,
+      rgb(190, 190, 2) 1px,
+      rgb(190, 190, 2) 20px
+    );
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 20.5px;
+    visibility: hidden;
+  }
+  
+  .note-icon:hover + .note {
+    visibility: visible;
+  }
 }
