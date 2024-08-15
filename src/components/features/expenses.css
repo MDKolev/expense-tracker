@@ -454,6 +454,61 @@ z-index: 0;
       
 }
 
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+
+  .feature-window {
+    height: 100%;
+    
+    .feature-header {
+      padding: 0 1rem;
+      margin: 0.5rem 2rem;
+
+      .add-btn {
+        font-size: 0.6rem;
+      }
+
+    }
+
+    .expense-info {
+      min-height: 100%;
+      
+
+      .table-row {
+        th {
+          font-size: 0.6rem;
+          padding:0;
+          padding: 0.2rem 0.5rem;
+         }
+      }
+
+      .td-action {
+        width:30%;
+      }
+
+      .td-note {
+        .note-icon {
+          font-size:1rem;
+        }
+
+        .note {
+          right: 3rem;
+        }
+      }
+     
+   
+      td{
+        padding: 0.2rem 0.2rem;
+        font-size: 0.5rem;
+
+        .date {
+          font-size: 0.3rem;
+        }
+      }
+    }
+ 
+  }
+}
+
 @media (min-width: 1025px) and (max-width: 1440px)  {
   
   .feature-window {

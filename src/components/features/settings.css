@@ -305,6 +305,7 @@
       }
 
       .appearance-modes {
+        display: flex;
         div {
           margin-left: 2rem;
         }
@@ -470,6 +471,7 @@
       }
 
       .appearance-modes {
+        display: flex;
         div {
           margin-left: 2rem;
         }
@@ -487,7 +489,6 @@
     
   }
 }
-
 
 @media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait)  {
   .feature-window{
@@ -578,6 +579,82 @@
       width: 10rem;
     }
     }    
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape){
+
+  .feature-window{
+    background-color: var(--feature-window-color);
+    height: 88%;
+
+    .feature-header {
+      padding: 0;
+      padding: 0 1rem;
+      
+      h1 {
+        font-size: 1rem;
+      }
+    }
+
+
+    .personal-info-container {
+      margin: 0;
+      h2 {
+        font-size: 0.8rem;
+      }
+
+      h3 {
+        font-size: 0.6rem;
+      }
+
+      p {
+        font-size: 0.6rem;
+      }
+      
+      .username-container {
+        justify-content: start;
+        gap: 2rem;
+        input {
+          font-size: 0.6rem;
+        }
+
+        .username-button {
+          font-size: 0.6rem;
+        }
+      }
+
+    }
+    
+    .profile-pic-container {
+      display: none;
+    }
+
+    .appearance-container {
+      h2 {
+        font-size: 0.8rem;
+        margin-left: 1rem;
+      }
+
+      .appearance-modes {
+        display: flex;
+
+        div {
+          margin-left: 2rem;
+        }
+
+        p{
+          font-size: 0.6rem;
+        }
+
+      }
+
+      .switch input{
+        width: 10rem;
+      }
+
+      }    
+    
   }
 }
 
