@@ -252,6 +252,77 @@
   }
 }
 
+@media screen and (min-width: 320px) and (max-width: 640px) and (orientation: landscape){
+
+  .feature-window{
+    background-color: var(--feature-window-color);
+    height: 88%;
+
+    .feature-header {
+      padding: 0 1rem;
+      
+      h1 {
+        font-size: 1rem;
+      }
+    }
+
+
+    .personal-info-container {
+      margin: 0;
+      h2 {
+        font-size: 0.8rem;
+      }
+
+      h3 {
+        font-size: 0.6rem;
+      }
+
+      p {
+        font-size: 0.6rem;
+      }
+      
+      .username-container {
+        gap:1rem;
+        input {
+          font-size: 0.6rem;
+        }
+
+        .username-button {
+          font-size: 0.6rem;
+        }
+      }
+
+    }
+    
+    .profile-pic-container {
+      display: none;
+    }
+
+    .appearance-container {
+      h2 {
+        font-size: 0.8rem;
+        margin-left: 1rem;
+      }
+
+      .appearance-modes {
+        div {
+          margin-left: 2rem;
+        }
+
+        p{
+          font-size: 0.6rem;
+        }
+      }
+
+      .switch input{
+        width: 10rem;
+      }
+
+      }    
+    
+  }
+}
+
 @media (min-width: 641px) and (max-width: 768px) and (orientation: portrait) { 
   
 
