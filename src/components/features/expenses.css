@@ -219,6 +219,10 @@ z-index: 0;
         .note-icon {
           font-size:1rem;
         }
+
+        .note {
+          right: 3rem;
+        }
       }
      
    
@@ -230,13 +234,9 @@ z-index: 0;
           font-size: 0.5rem;
         }
       }
-
-      
     }
  
   }
-
-
 }
 
 @media (min-width: 641px) and (max-width: 768px) and (orientation: portrait) { 
@@ -272,6 +272,9 @@ z-index: 0;
       .td-note {
         .note-icon {
           font-size:1rem;
+        }
+        .note {
+          right: 4rem;
         }
       }
      
@@ -321,6 +324,9 @@ z-index: 0;
       .td-note {
         .note-icon {
           font-size:1.5rem;
+        }
+        .note {
+          right: 5rem;
         }
       }
      
@@ -376,6 +382,9 @@ z-index: 0;
       .td-note {
         .note-icon {
           font-size:1.5rem;
+        }
+        .note {
+          right: 6rem;
         }
       }
      
