@@ -477,17 +477,17 @@ z-index: 0;
         th {
           font-size: 0.6rem;
           padding:0;
-          padding: 0.2rem 0.5rem;
+          padding: 0.2em 0.5rem;
          }
       }
 
       .td-action {
-        width:30%;
+        width:25%;
       }
 
       .td-note {
         .note-icon {
-          font-size:1rem;
+          font-size:0.8rem;
         }
 
         .note {
@@ -497,8 +497,8 @@ z-index: 0;
      
    
       td{
-        padding: 0.2rem 0.2rem;
-        font-size: 0.5rem;
+        padding: 0.1rem;
+        font-size: 0.45rem;
 
         .date {
           font-size: 0.3rem;
