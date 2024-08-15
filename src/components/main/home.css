@@ -105,6 +105,7 @@
           font-size: 0;
           svg{
             font-size: 1rem;
+            color:#fff;
           }
 
           #settings-icon {
@@ -117,6 +118,7 @@
           svg {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
+            color:#fff;
           }
         }
 
@@ -263,6 +265,7 @@
           font-size: 0;
           svg{
             font-size: 1rem;
+            color:#fff;
           }
 
           #settings-icon {
@@ -275,6 +278,7 @@
           svg {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
+            color:#fff;
           }
         }
 
@@ -420,6 +424,7 @@
           font-size: 0;
           svg{
             font-size: 1rem;
+            color:#fff;
           }
 
           #settings-icon {
@@ -432,6 +437,7 @@
           svg {
             font-size: 1rem;
             margin-bottom: 0.5rem;
+            color:#fff;
           }
         }
 
