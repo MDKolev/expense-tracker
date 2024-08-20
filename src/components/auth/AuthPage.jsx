@@ -37,6 +37,10 @@ const AuthPage = () => {
     }
   };
 
+  const handleSignUpSuccess = () => {
+    handleSignInToggle(); 
+  };
+
   return (
     <div className="container">
       <div className="sign-in-container">
@@ -50,7 +54,7 @@ const AuthPage = () => {
       </div>
       <div className="separator"></div>
       <div className="sign-up-container">
-        {showSignUp && <SignUp signInWithGoogle={handleSignInWithGoogle} />}
+        {showSignUp && <SignUp signInWithGoogle={handleSignInWithGoogle} signUpSuccess={handleSignUpSuccess}/>}
         {showLeft && (
           <div className="left" onClick={handleSignUpToggle}>
             <h1>Already registered?</h1>

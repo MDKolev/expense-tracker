@@ -7,19 +7,18 @@ import { auth } from "../../firebase-config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { toast } from "sonner";
 
-const SignUp = ({signInWithGoogle}) => {
+const SignUp = ({ signInWithGoogle, signUpSuccess }) => {
   const [userCredentials, setUserCredentials] = useState({});
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
   const handleCredentials = (e) => {
-
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
     console.log(userCredentials);
   };
 
-  const handleSignUp = async(e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    setError("")
+    setError("");
 
     try {
       await createUserWithEmailAndPassword(
@@ -29,10 +28,11 @@ const SignUp = ({signInWithGoogle}) => {
       );
       console.log(auth.currentUser);
       const user = auth.currentUser;
-      localStorage.setItem('creationTime', user.metadata.creationTime)
-      toast.success("Account created! You may log in!")
+      localStorage.setItem("creationTime", user.metadata.creationTime);
+      signUpSuccess();
+      toast.success("Account created! You may log in!");
     } catch (err) {
-      setError(err.message)
+      setError(err.message);
     }
   };
 
@@ -63,10 +63,8 @@ const SignUp = ({signInWithGoogle}) => {
           />
         </div>
 
-        {error &&  <div className="error">{error}</div>}
-     
+        {error && <div className="error">{error}</div>}
       </form>
-
 
       <button
         className="sign-up-button"
