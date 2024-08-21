@@ -48,7 +48,7 @@ const AuthPage = () => {
         {showRight && (
           <div className="right" onClick={handleSignInToggle}>
             <h1>No Account?</h1>
-            <p>Register now and track all your expences for free</p>
+            <p>Register now and track all your expenses for free</p>
           </div>
         )}
       </div>
